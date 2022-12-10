@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 // material-ui
 import {
@@ -23,15 +24,22 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project import
-import FirebaseSocial from './FirebaseSocial';
+// import FirebaseSocial from './FirebaseSocial';
 import AnimateButton from 'components/@extended/AnimateButton';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { login } from 'store/reducers/authSlice';
+import { useDispatch } from 'react-redux';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [checked, setChecked] = React.useState(false);
 
     const [showPassword, setShowPassword] = React.useState(false);
@@ -43,16 +51,22 @@ const AuthLogin = () => {
         event.preventDefault();
     };
 
-    const handleLogin = () => {
-        console.log('Login now');
+    const handleLogin = async (formData) => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_LOGIN_URL, formData);
+            return response;
+        } catch (e) {
+            toast('Wow something wrong!');
+            console.log('Wow something wrong!');
+        }
     };
 
     return (
         <>
             <Formik
                 initialValues={{
-                    email: 'info@codedthemes.com',
-                    password: '123456',
+                    email: 'yangwawa0323@163.com',
+                    password: '12345678',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -62,11 +76,20 @@ const AuthLogin = () => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                         setStatus({ success: false });
-                        setSubmitting(false);
+                        const response = await handleLogin(values);
+                        const data = response.data;
+                        // 1. save
+                        localStorage.setItem('token', data?.token);
+                        // 2. dispatch
+                        dispatch(login());
+                        // 3. navigate to.
+                        navigate('/dashboard/default');
+
+                        setTimeout(() => setSubmitting(false), 3000);
                     } catch (err) {
                         setStatus({ success: false });
                         setErrors({ submit: err.message });
-                        setSubmitting(false);
+                        setTimeout(() => setSubmitting(false), 3000);
                     }
                 }}
             >
@@ -163,24 +186,26 @@ const AuthLogin = () => {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        onClick={handleLogin}
                                     >
                                         Login
                                     </Button>
                                 </AnimateButton>
                             </Grid>
-                            <Grid item xs={12}>
+                            {/*  <Grid item xs={12}>
                                 <Divider>
                                     <Typography variant="caption"> Login with</Typography>
                                 </Divider>
                             </Grid>
                             <Grid item xs={12}>
                                 <FirebaseSocial />
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </form>
                 )}
             </Formik>
+            <div>
+                <ToastContainer />
+            </div>
         </>
     );
 };

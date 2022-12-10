@@ -7,7 +7,7 @@ const PublicRoute = () => {
     const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn || false);
     const isAuthenticted = isLoggedIn || localStorage.getItem('token');
 
-    return isAuthenticted ? <Navigate to="/" /> : <Outlet />;
+    return isAuthenticted ? <Navigate to="/dashboard/default" /> : <Outlet />;
 };
 
 export default PublicRoute;

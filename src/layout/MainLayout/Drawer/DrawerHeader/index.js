@@ -12,10 +12,12 @@ import styled from '@emotion/styled';
 
 // ==============================|| DRAWER HEADER ||============================== //
 const StyledLogo = styled.img((prop) => ({
-    width: '6rem',
-    height: '6rem',
+    width: '4rem',
+    height: '4rem',
     borderRadius: '5%'
 }));
+
+const LogoDiv = styled.div((prop) => ({}));
 
 const DrawerHeader = ({ open }) => {
     const theme = useTheme();
@@ -23,10 +25,10 @@ const DrawerHeader = ({ open }) => {
     return (
         // only available in paid version
         <DrawerHeaderStyled theme={theme} open={open}>
-            <Stack direction="row" spacing={1} alignItems="center">
-                <div>
+            <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                <LogoDiv>
                     <StyledLogo src={Logo} />
-                </div>
+                </LogoDiv>
                 <Chip
                     label={process.env.REACT_APP_VERSION}
                     size="small"
