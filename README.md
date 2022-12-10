@@ -1,4 +1,5 @@
-# 51cloudclass Mantis React Material UI Dashboard Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?
+# 51cloudclass Mantis React Material UI Dashboard Template 
+![51cloudclass](http://img.51cloudclass.com/logo.png)
 
 
 ## email & password loggin
