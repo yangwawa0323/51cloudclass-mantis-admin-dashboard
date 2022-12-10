@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
+import PrivateRoute from './PrivateRoute';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -20,40 +21,46 @@ const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons'
 
 const MainRoutes = {
     path: '/',
-    element: <MainLayout />,
+    element: <PrivateRoute />,
     children: [
         {
             path: '/',
-            element: <DashboardDefault />
-        },
-        {
-            path: 'color',
-            element: <Color />
-        },
-        {
-            path: 'dashboard',
+            element: <MainLayout />,
             children: [
                 {
-                    path: 'default',
+                    path: '/',
                     element: <DashboardDefault />
+                },
+                {
+                    path: 'color',
+                    element: <Color />
+                },
+                {
+                    path: 'dashboard',
+                    children: [
+                        {
+                            path: 'default',
+                            element: <DashboardDefault />
+                        }
+                    ]
+                },
+                {
+                    path: 'sample-page',
+                    element: <SamplePage />
+                },
+                {
+                    path: 'shadow',
+                    element: <Shadow />
+                },
+                {
+                    path: 'typography',
+                    element: <Typography />
+                },
+                {
+                    path: 'icons/ant',
+                    element: <AntIcons />
                 }
             ]
-        },
-        {
-            path: 'sample-page',
-            element: <SamplePage />
-        },
-        {
-            path: 'shadow',
-            element: <Shadow />
-        },
-        {
-            path: 'typography',
-            element: <Typography />
-        },
-        {
-            path: 'icons/ant',
-            element: <AntIcons />
         }
     ]
 };

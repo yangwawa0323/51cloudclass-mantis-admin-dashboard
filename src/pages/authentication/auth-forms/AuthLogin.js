@@ -43,6 +43,10 @@ const AuthLogin = () => {
         event.preventDefault();
     };
 
+    const handleLogin = () => {
+        console.log('Login now');
+    };
+
     return (
         <>
             <Formik
@@ -159,6 +163,7 @@ const AuthLogin = () => {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
+                                        onClick={handleLogin}
                                     >
                                         Login
                                     </Button>

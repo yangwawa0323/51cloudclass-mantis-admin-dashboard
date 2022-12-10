@@ -16,7 +16,7 @@
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
-            "impliedStrict": true
+            "impliedStrict": false
         },
         "ecmaVersion": 12
     },
@@ -35,7 +35,7 @@
         "prefer-destructuring": 0,
         "no-shadow": 0,
         "no-unused-vars": [
-            1,
+            0,
             {
                 "ignoreRestSiblings": false
             }
