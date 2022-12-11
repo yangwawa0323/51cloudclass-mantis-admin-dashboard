@@ -14,7 +14,9 @@ const auth = createSlice({
     reducers: {
         login(state, action) {
             // should validate the token
-            state.isLoggedIn = true;
+            if (localStorage.getItem('token')) {
+                state.isLoggedIn = true;
+            }
         },
         logout(state, action) {
             localStorage.removeItem('token');

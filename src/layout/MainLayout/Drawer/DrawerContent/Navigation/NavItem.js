@@ -1,3 +1,4 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { forwardRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,16 +8,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 // project import
 import { activeItem } from 'store/reducers/menuSlice';
+import { Collapse } from '@mui/material';
+import styled from '@emotion/styled';
+
+const StyledCollapseIcon = styled.div((prop) => ({ fontSize: '0.625rem', marginLeft: 1 }));
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
-const NavItem = ({ item, level }) => {
+const NavItem = ({ item, level, childrenMenu }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const menu = useSelector((state) => state.menu);
     const { drawerOpen, openItem } = menu;
+    const [open, setOpen] = React.useState(false);
 
     let itemTarget = '_self';
     if (item.target) {
@@ -29,6 +36,7 @@ const NavItem = ({ item, level }) => {
     }
 
     const itemHandler = (id) => {
+        setOpen(!open);
         dispatch(activeItem({ openItem: [id] }));
     };
 
@@ -53,94 +61,103 @@ const NavItem = ({ item, level }) => {
     const iconSelectedColor = 'primary.main';
 
     return (
-        <ListItemButton
-            {...listItemProps}
-            disabled={item.disabled}
-            onClick={() => itemHandler(item.id)}
-            selected={isSelected}
-            sx={{
-                zIndex: 1201,
-                pl: drawerOpen ? `${level * 28}px` : 1.5,
-                py: !drawerOpen && level === 1 ? 1.25 : 1,
-                ...(drawerOpen && {
-                    '&:hover': {
-                        bgcolor: 'primary.lighter'
-                    },
-                    '&.Mui-selected': {
-                        bgcolor: 'primary.lighter',
-                        borderRight: `2px solid ${theme.palette.primary.main}`,
-                        color: iconSelectedColor,
+        <>
+            <ListItemButton
+                {...listItemProps}
+                disabled={item.disabled}
+                onClick={() => itemHandler(item.id)}
+                selected={isSelected}
+                sx={{
+                    zIndex: 1201,
+                    pl: drawerOpen ? `${level * 28}px` : 1.5,
+                    py: !drawerOpen && level === 1 ? 1.25 : 1,
+                    ...(drawerOpen && {
                         '&:hover': {
-                            color: iconSelectedColor,
                             bgcolor: 'primary.lighter'
+                        },
+                        '&.Mui-selected': {
+                            bgcolor: 'primary.lighter',
+                            borderRight: `2px solid ${theme.palette.primary.main}`,
+                            color: iconSelectedColor,
+                            '&:hover': {
+                                color: iconSelectedColor,
+                                bgcolor: 'primary.lighter'
+                            }
                         }
-                    }
-                }),
-                ...(!drawerOpen && {
-                    '&:hover': {
-                        bgcolor: 'transparent'
-                    },
-                    '&.Mui-selected': {
+                    }),
+                    ...(!drawerOpen && {
                         '&:hover': {
                             bgcolor: 'transparent'
                         },
-                        bgcolor: 'transparent'
-                    }
-                })
-            }}
-        >
-            {itemIcon && (
-                <ListItemIcon
-                    sx={{
-                        minWidth: 28,
-                        color: isSelected ? iconSelectedColor : textColor,
-                        ...(!drawerOpen && {
-                            borderRadius: 1.5,
-                            width: 36,
-                            height: 36,
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                        '&.Mui-selected': {
                             '&:hover': {
-                                bgcolor: 'secondary.lighter'
-                            }
-                        }),
-                        ...(!drawerOpen &&
-                            isSelected && {
-                                bgcolor: 'primary.lighter',
+                                bgcolor: 'transparent'
+                            },
+                            bgcolor: 'transparent'
+                        }
+                    })
+                }}
+            >
+                {itemIcon && (
+                    <ListItemIcon
+                        sx={{
+                            minWidth: 28,
+                            color: isSelected ? iconSelectedColor : textColor,
+                            ...(!drawerOpen && {
+                                borderRadius: 1.5,
+                                width: 36,
+                                height: 36,
+                                alignItems: 'center',
+                                justifyContent: 'center',
                                 '&:hover': {
-                                    bgcolor: 'primary.lighter'
+                                    bgcolor: 'secondary.lighter'
                                 }
-                            })
-                    }}
-                >
-                    {itemIcon}
-                </ListItemIcon>
+                            }),
+                            ...(!drawerOpen &&
+                                isSelected && {
+                                    bgcolor: 'primary.lighter',
+                                    '&:hover': {
+                                        bgcolor: 'primary.lighter'
+                                    }
+                                })
+                        }}
+                    >
+                        {itemIcon}
+                    </ListItemIcon>
+                )}
+                {(drawerOpen || (!drawerOpen && level !== 1)) && (
+                    <ListItemText
+                        primary={
+                            <Typography variant="h6" sx={{ color: isSelected ? iconSelectedColor : textColor }}>
+                                {item.title}
+                            </Typography>
+                        }
+                    />
+                )}
+                {item.type === 'collapse' && <StyledCollapseIcon>{open ? <UpOutlined /> : <DownOutlined />}</StyledCollapseIcon>}
+                {(drawerOpen || (!drawerOpen && level !== 1)) && item.chip && (
+                    <Chip
+                        color={item.chip.color}
+                        variant={item.chip.variant}
+                        size={item.chip.size}
+                        label={item.chip.label}
+                        avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
+                    />
+                )}
+            </ListItemButton>
+            {childrenMenu && (
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    {childrenMenu}
+                </Collapse>
             )}
-            {(drawerOpen || (!drawerOpen && level !== 1)) && (
-                <ListItemText
-                    primary={
-                        <Typography variant="h6" sx={{ color: isSelected ? iconSelectedColor : textColor }}>
-                            {item.title}
-                        </Typography>
-                    }
-                />
-            )}
-            {(drawerOpen || (!drawerOpen && level !== 1)) && item.chip && (
-                <Chip
-                    color={item.chip.color}
-                    variant={item.chip.variant}
-                    size={item.chip.size}
-                    label={item.chip.label}
-                    avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
-                />
-            )}
-        </ListItemButton>
+        </>
     );
 };
 
 NavItem.propTypes = {
     item: PropTypes.object,
-    level: PropTypes.number
+    level: PropTypes.number,
+    childrenMenu: PropTypes.arrayOf(PropTypes.element)
 };
 
 export default NavItem;

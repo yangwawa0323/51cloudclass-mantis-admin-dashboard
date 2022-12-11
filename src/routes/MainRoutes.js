@@ -45,6 +45,10 @@ const MainRoutes = {
                     ]
                 },
                 {
+                    path: 'user-profile',
+                    element: <SamplePage />
+                },
+                {
                     path: 'sample-page',
                     element: <SamplePage />
                 },

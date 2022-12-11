@@ -1,8 +1,9 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 // material-ui
-import { Box, List, Typography } from '@mui/material';
+import { Box, List, Typography, Collapse } from '@mui/material';
 
 // project import
 import NavItem from './NavItem';
@@ -12,25 +13,33 @@ import NavItem from './NavItem';
 const NavGroup = ({ item }) => {
     const menu = useSelector((state) => state.menu);
     const { drawerOpen } = menu;
+    const [open, setOpen] = React.useState(true);
 
-    const navCollapse = item.children?.map((menuItem) => {
-        switch (menuItem.type) {
-            case 'collapse':
-                return (
-                    <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }}>
-                        collapse - only available in paid version
-                    </Typography>
-                );
-            case 'item':
-                return <NavItem key={menuItem.id} item={menuItem} level={1} />;
-            default:
-                return (
-                    <Typography key={menuItem.id} variant="h6" color="error" align="center">
-                        Fix - Group Collapse or Items
-                    </Typography>
-                );
-        }
-    });
+    const toggleCollapse = () => {
+        console.log('[DEBUG]: show chilren menu');
+        setOpen(!open);
+    };
+
+    const navCollapse = (menuItem) => {
+        return menuItem?.children?.map((childMenu) => {
+            switch (childMenu.type) {
+                case 'collapse':
+                    const childrenMenu = childMenu.children?.map((menu, index) => {
+                        // console.log('[DEBUG] children item:', menu);
+                        return <NavItem key={index} item={menu} level={2} />;
+                    });
+                    return <NavItem key={childMenu.id} item={childMenu} level={1} childrenMenu={childrenMenu} />;
+                case 'item':
+                    return <NavItem key={childMenu.id} item={childMenu} level={1} />;
+                default:
+                    return (
+                        <Typography key={childMenu.id} variant="h6" color="error" align="center">
+                            {childMenu.title}
+                        </Typography>
+                    );
+            }
+        });
+    };
 
     return (
         <List
@@ -47,7 +56,7 @@ const NavGroup = ({ item }) => {
             }
             sx={{ mb: drawerOpen ? 1.5 : 0, py: 0, zIndex: 0 }}
         >
-            {navCollapse}
+            {navCollapse(item)}
         </List>
     );
 };
