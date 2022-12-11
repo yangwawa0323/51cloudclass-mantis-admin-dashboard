@@ -176,10 +176,10 @@ export default function OrderTable() {
                 <Table
                     aria-labelledby="tableTitle"
                     sx={{
-                        '& .MuiTableCell-root:first-child': {
+                        '& .MuiTableCell-root:first-of-type': {
                             pl: 2
                         },
-                        '& .MuiTableCell-root:last-child': {
+                        '& .MuiTableCell-root:last-of-type': {
                             pr: 3
                         }
                     }}
