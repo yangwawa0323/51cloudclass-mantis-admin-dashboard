@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
     Link,
     Grid,
@@ -12,13 +13,14 @@ import {
     List,
     ListItem,
     Popover,
+    IconButton,
     ListItemIcon,
     ListItemSecondaryAction
 } from '@mui/material';
 import styled from '@emotion/styled';
 import Avatar from '@mui/material/Avatar';
 import StyledMain from 'pages/main';
-import { MailOutlined, PhoneOutlined, EnvironmentOutlined, LinkOutlined } from '@ant-design/icons';
+import { MailOutlined, PhoneOutlined, EnvironmentOutlined, LinkOutlined, UpSquareOutlined } from '@ant-design/icons';
 import Typography from '@mui/material/Typography';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -259,7 +261,14 @@ const Profile = (props) => {
                                     backgroundColor: 'white'
                                 }}
                             >
-                                <CardHeader title={<Typography variant="subtitle1">Person Details</Typography>} />
+                                <CardHeader
+                                    action={
+                                        <IconButton onClick={() => node?.setSelected(false)}>
+                                            <UpSquareOutlined />
+                                        </IconButton>
+                                    }
+                                    title={<Typography variant="subtitle1">Person Details</Typography>}
+                                />
                                 <Divider />
                                 <CardContent>
                                     <List>
@@ -334,6 +343,9 @@ const Profile = (props) => {
             </div>
         </StyledMain>
     );
+};
+Profile.propTypes = {
+    node: PropTypes.object
 };
 
 export default Profile;

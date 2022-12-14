@@ -91,7 +91,6 @@ const UserList = () => {
     }, []);
 
     const reset = () => {
-        console.log('###########[DEBUG]###########', gridRef);
         const renderedNodes = gridRef.current.api.getRenderedNodes();
         renderedNodes.forEach((node) => node.setSelected(false));
     };
@@ -111,11 +110,7 @@ const UserList = () => {
 
     return (
         <div className="main">
-            <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', paddingRight: '40px' }}>
-                <Button variant="contained" color="primary" onClick={reset}>
-                    Reset
-                </Button>
-            </div>
+            <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', paddingRight: '40px' }}></div>
             {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
             <div className="ag-theme-material" style={{ width: 'auto', height: '100%' }}>
                 <AgGridReact
