@@ -4,6 +4,11 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import PrivateRoute from './PrivateRoute';
+import UserProfile from 'pages/profile/user-profile';
+import AccountProfile from 'pages/profile/account-profile';
+import UserList from 'pages/profile/user-list';
+import UserCard from 'pages/profile/user-card';
+import Profile from 'pages/profile/profile';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -44,10 +49,28 @@ const MainRoutes = {
                         }
                     ]
                 },
+                // User
+                {
+                    path: 'profile',
+                    element: <Profile />
+                },
                 {
                     path: 'user-profile',
-                    element: <SamplePage />
+                    element: <UserProfile />
                 },
+                {
+                    path: 'account-profile',
+                    element: <AccountProfile />
+                },
+                {
+                    path: 'user-list',
+                    element: <UserList />
+                },
+                {
+                    path: 'user-card',
+                    element: <UserCard />
+                },
+                //   == end User ==
                 {
                     path: 'sample-page',
                     element: <SamplePage />

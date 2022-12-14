@@ -35,14 +35,36 @@ const pages = {
             id: 'profile',
             type: 'collapse',
             title: 'Profile',
-            // url: '/profile',
+            url: '/profile',
             icon: icons.UserOutlined,
+            target: false,
             children: [
                 {
-                    id: 'fake1',
+                    id: 'user-profile',
                     type: 'item',
                     title: 'User Profile',
                     url: '/user-profile',
+                    target: false
+                },
+                {
+                    id: 'account-profile',
+                    type: 'item',
+                    title: 'Account Profile',
+                    url: '/account-profile',
+                    target: false
+                },
+                {
+                    id: 'user-List',
+                    type: 'item',
+                    title: 'User List',
+                    url: '/user-list',
+                    target: false
+                },
+                {
+                    id: 'user-card',
+                    type: 'item',
+                    title: 'User Card',
+                    url: '/user-card',
                     target: false
                 }
             ]
