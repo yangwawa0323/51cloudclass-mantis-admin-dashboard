@@ -12,13 +12,30 @@ import { createApi } from 'unsplash-js';
 import EditBtnGroup from './operation';
 import './user-profile.css';
 import Profile from './profile';
-import { Button } from '@mui/material';
+import { Button, Chip } from '@mui/material';
 
 const StyledMain = styled.div((prop) => ({
     padding: '10px 40px',
     minHeight: '680px',
     height: '80vh'
 }));
+
+const RandomStatus = (props) => {
+    const [status] = useState(['Rejected', 'Verified', 'Pending']);
+    const [bgcolor] = useState(['rgb(255, 77, 79, 0.1)', 'rgb(82, 196, 26, 0.1)', 'rgb(19, 194, 194, 0.1)']);
+    const [color] = useState(['rgb(255, 77, 79)', 'rgb(82, 196, 26)', 'rgb(19, 194, 194)']);
+    var random = Math.ceil(Math.random() * 3) % 3;
+    return (
+        <span>
+            <Chip
+                sx={{ fontSize: '0.725rem', fontWeight: '500', height: '1.2rem', color: color[random], backgroundColor: bgcolor[random] }}
+                variant="filled"
+                size="small"
+                label={status[random]}
+            />
+        </span>
+    );
+};
 
 const UserList = () => {
     const gridRef = useRef(); // Optional - for accessing Grid's API
@@ -52,7 +69,9 @@ const UserList = () => {
             cellRenderer: avatarRenderer
         },
         { field: 'user.name', headerName: 'User Name' },
+        { field: 'status', cellRenderer: useMemo((params) => RandomStatus) },
         { field: 'links.photos', headerName: 'Photo link', flex: 2 },
+        { field: 'title', headerName: 'Title' },
         { field: 'operation', cellRenderer: useMemo((params) => EditBtnGroup) }
     ]);
 
@@ -78,7 +97,7 @@ const UserList = () => {
     }, []);
 
     const getRowHeight = useCallback((params) => {
-        let rowHeight = params.node.selected ? 600 : 60;
+        let rowHeight = params.node.selected ? 600 : 47;
         return rowHeight;
     }, []);
 
@@ -99,9 +118,8 @@ const UserList = () => {
         const selectedNodes = params.api.getSelectedNodes();
         const renderedNodes = params.api.getRenderedNodes();
 
-        // console.log('@@@@[DEBUG]@@@@ params: ', params);
         // Restore all the nodes height to 60px;
-        renderedNodes.forEach((node) => node.setRowHeight(50));
+        renderedNodes.forEach((node) => node.setRowHeight(47));
         selectedNodes[0]?.setRowHeight(600);
         params.api.onRowHeightChanged();
         const selectedRows = params.api.getSelectedRows();

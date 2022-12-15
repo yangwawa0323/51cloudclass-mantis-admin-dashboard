@@ -9,6 +9,9 @@ import AccountProfile from 'pages/profile/account-profile';
 import UserList from 'pages/profile/user-list';
 import UserCard from 'pages/profile/user-card';
 import Profile from 'pages/profile/profile';
+import UserCardList from 'pages/profile/user-card-list';
+import CopyTOClipboard from 'pages/plugins/copy-to-clipboard';
+import Mask from 'pages/plugins/mask';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -67,6 +70,10 @@ const MainRoutes = {
                     element: <UserList />
                 },
                 {
+                    path: 'user-card-list',
+                    element: <UserCardList />
+                },
+                {
                     path: 'user-card',
                     element: <UserCard />
                 },
@@ -86,6 +93,20 @@ const MainRoutes = {
                 {
                     path: 'icons/ant',
                     element: <AntIcons />
+                },
+                // Plugins
+                {
+                    path: 'plugins',
+                    children: [
+                        {
+                            path: 'copy-to-clipboard',
+                            element: <CopyTOClipboard />
+                        },
+                        {
+                            path: 'mask',
+                            element: <Mask />
+                        }
+                    ]
                 }
             ]
         }

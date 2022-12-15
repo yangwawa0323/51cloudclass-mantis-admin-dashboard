@@ -26,14 +26,21 @@ import { DeleteFilled } from '@ant-design/icons';
 
 const EditUserProfile = ({ open, node }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [status, setStatus] = useState('');
 
+    const { user } = node.data;
     useEffect(() => {
         setDialogOpen(open);
+        console.log('#####[DEBUG]##### node: ', node);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const closeDialog = () => {
         setDialogOpen(false);
+    };
+
+    const changeStatus = (event) => {
+        setStatus(event.target.value);
     };
 
     return (
@@ -46,27 +53,31 @@ const EditUserProfile = ({ open, node }) => {
                         <Grid container spacing={{ x: 3 }} justifyContent="center" direction="row">
                             <Grid item xs={12} md={3}>
                                 <Box sx={{ justifyContent: 'center', display: 'flex', paddingTop: '24px', marginLeft: '-24px' }}>
-                                    <Avatar sx={{ width: '72px', height: '72px' }}></Avatar>
+                                    <Avatar sx={{ width: '72px', height: '72px' }}>
+                                        <img src={user.profile_image.medium} alt={user.name} />
+                                    </Avatar>
                                 </Box>
                             </Grid>
                             <Grid item xs={12} md={8}>
                                 <Grid container direction="column" spacing={{ xs: 3 }}>
                                     <Grid item>
                                         <InputLabel>Name</InputLabel>
-                                        <OutlinedInput sx={{ marginTop: '10px' }} fullWidth value={'Aaron Edwards'} />
+                                        <OutlinedInput sx={{ marginTop: '10px' }} fullWidth value={user.name} />
                                     </Grid>
                                     <Grid item>
                                         <InputLabel>Email</InputLabel>
                                         <OutlinedInput sx={{ marginTop: '10px' }} fullWidth={true} value={'mazol@gmail.com'} />
                                     </Grid>
                                     <Grid item>
-                                        <InputLabel id="status">Status</InputLabel>
-                                        <Select defaultValue={'select status'} labelId="status" fullWidth={true}>
-                                            <MenuItem value={'rejected'}>Rejected</MenuItem>
-                                            <MenuItem value={'pending'}>Pending</MenuItem>
-                                            <MenuItem value={'verified'}>Verified</MenuItem>
-                                        </Select>
-                                        <FormHelperText error>Name is required</FormHelperText>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="status-label">Status</InputLabel>
+                                            <Select id="status" value={status} onChange={changeStatus} labelId="status-label">
+                                                <MenuItem value="rejected">Rejected</MenuItem>
+                                                <MenuItem value="pending">Pending</MenuItem>
+                                                <MenuItem value="verified">Verified</MenuItem>
+                                            </Select>
+                                            <FormHelperText error>Name is required</FormHelperText>
+                                        </FormControl>
                                     </Grid>
                                     <Grid item>
                                         <InputLabel>Location</InputLabel>
@@ -78,7 +89,7 @@ const EditUserProfile = ({ open, node }) => {
                                             placeholder={'Enter localtion'}
                                         />
                                     </Grid>
-                                    <Grid item justifyContent="space-between" alignItems="flex-start">
+                                    <Grid item sx={{ gap: '24px', display: 'flex', flexDirection: 'column' }}>
                                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                                 <Typography variant="h6">Make Contact Info Public</Typography>
@@ -112,7 +123,9 @@ const EditUserProfile = ({ open, node }) => {
                                 </IconButton>
                             </Grid>
                             <Grid item sx={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                                <Button color="error">Cancel</Button>
+                                <Button color="error" onClick={() => setDialogOpen(false)}>
+                                    Cancel
+                                </Button>
                                 <Button variant="contained" size="medium" color="primary">
                                     Edit
                                 </Button>

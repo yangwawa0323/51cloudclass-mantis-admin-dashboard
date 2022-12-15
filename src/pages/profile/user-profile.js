@@ -35,6 +35,7 @@ function MyRenderer(params) {
 
 function UserProfile() {
     const [rowData, setRowData] = useState([]);
+    const [sortby, setSortBy] = useState('');
     const gridRef = useRef(null);
 
     const handleCellValueChanged = (params) => {
@@ -102,8 +103,8 @@ function UserProfile() {
                 width: 80,
                 headerCheckboxSelection: true,
                 checkboxSelection: true,
-                suppressMenu: true,
-                suppressSorting: true
+                suppressMenu: true
+                // suppressSorting: true
             },
 
             { field: 'account', editable: false /*,  cellRenderer: MyRenderer */ },
@@ -137,12 +138,22 @@ function UserProfile() {
         suppressRowClickSelection: true
     }));
 
+    const handleSortBy = (event) => {
+        setSortBy(event.target.value);
+    };
+
     return (
         <div className="main">
             <div className="op-container">
                 <FormControl sx={{ width: 260 }}>
                     <InputLabel id="demo-simple-select-label">Sort by (User name)</InputLabel>
-                    <Select labelId="demo-simple-select-label" id="demo-simple-select">
+                    <Select
+                        defaultValue=""
+                        onChange={handleSortBy}
+                        value={sortby}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                    >
                         <MenuItem value="#">#</MenuItem>
                         <MenuItem value={'username'}>User Name</MenuItem>
                         <MenuItem value={'email'}>Email</MenuItem>

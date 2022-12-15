@@ -47,6 +47,13 @@ const pages = {
                     target: false
                 },
                 {
+                    id: 'user-card-list',
+                    type: 'item',
+                    title: 'User Card List',
+                    url: '/user-card-list',
+                    target: false
+                },
+                {
                     id: 'account-profile',
                     type: 'item',
                     title: 'Account Profile',
@@ -54,7 +61,7 @@ const pages = {
                     target: false
                 },
                 {
-                    id: 'user-List',
+                    id: 'user-list',
                     type: 'item',
                     title: 'User List',
                     url: '/user-list',
@@ -65,6 +72,29 @@ const pages = {
                     type: 'item',
                     title: 'User Card',
                     url: '/user-card',
+                    target: false
+                }
+            ]
+        },
+        {
+            id: 'plugins',
+            type: 'collapse',
+            title: 'Plugins',
+            icon: icons.UserOutlined,
+            target: false,
+            children: [
+                {
+                    id: 'copies',
+                    type: 'item',
+                    title: 'Copy to Clipboard',
+                    url: '/plugins/copy-to-clipboard',
+                    target: false
+                },
+                {
+                    id: 'mask',
+                    type: 'item',
+                    title: 'Mask',
+                    url: '/plugins/mask',
                     target: false
                 }
             ]
