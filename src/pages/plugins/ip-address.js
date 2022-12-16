@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { OutlinedInput } from '@mui/material';
 
 // 127.0.0.1
-const InputIPAddress = React.forwardRef((props, ref) => {
+const InputIPAddress = (props) => {
+    const inputRef = React.createRef(null);
+
     const checkIpValue = (value) => {
         const subips = value.split('.');
         if (subips.length > 4) {
@@ -67,10 +69,11 @@ const InputIPAddress = React.forwardRef((props, ref) => {
             alwaysShowMask={false}
             beforeMaskedStateChange={beforeMaskedStateChange}
         >
-            <OutlinedInput ref={ref} />
+            {/* <OutlinedInputWithRef ref={inputRef} /> */}
+            <OutlinedInput ref={inputRef} />
         </InputMask>
     );
-});
+};
 
 export default InputIPAddress;
 

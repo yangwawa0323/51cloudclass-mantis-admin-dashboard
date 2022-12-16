@@ -13,6 +13,14 @@ import UserCardList from 'pages/profile/user-card-list';
 import CopyTOClipboard from 'pages/plugins/copy-to-clipboard';
 import Mask from 'pages/plugins/mask';
 
+// react table component
+import Base from 'pages/react-table/base';
+import Sorting from 'pages/react-table/sorting';
+import Filtering from 'pages/react-table/filtering';
+import Grouping from 'pages/react-table/grouping';
+import Pagination from 'pages/react-table/pagination';
+import RowSelection from 'pages/react-table/row-selection';
+
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
@@ -105,6 +113,36 @@ const MainRoutes = {
                         {
                             path: 'mask',
                             element: <Mask />
+                        }
+                    ]
+                },
+                // React table
+                {
+                    path: 'react-table',
+                    children: [
+                        {
+                            path: 'base',
+                            element: <Base />
+                        },
+                        {
+                            path: 'sorting',
+                            element: <Sorting />
+                        },
+                        {
+                            path: 'filtering',
+                            element: <Filtering />
+                        },
+                        {
+                            path: 'grouping',
+                            element: <Grouping />
+                        },
+                        {
+                            path: 'pagination',
+                            element: <Pagination />
+                        },
+                        {
+                            path: 'row-selection',
+                            element: <RowSelection />
                         }
                     ]
                 }

@@ -7,8 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import InputIpAddress from './ip-address';
 
-const inputRef = React.createRef();
-
 const Mask = () => {
     const [value, setValue] = React.useState(dayjs(new Date().toUTCString()));
     const [ipAddress, setIpAddress] = React.useState('');
@@ -88,7 +86,7 @@ const Mask = () => {
                             <Stack>
                                 <Stack>
                                     <Typography></Typography>
-                                    <InputIpAddress ref={inputRef} />
+                                    <InputIpAddress />
                                 </Stack>
                             </Stack>
                         </CardContent>

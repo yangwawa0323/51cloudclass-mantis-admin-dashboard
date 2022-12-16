@@ -1,11 +1,12 @@
 // assets
-import { LoginOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginOutlined, ProfileOutlined, UserOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
     LoginOutlined,
     ProfileOutlined,
-    UserOutlined
+    UserOutlined,
+    InsertRowAboveOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -72,6 +73,57 @@ const pages = {
                     type: 'item',
                     title: 'User Card',
                     url: '/user-card',
+                    target: false
+                }
+            ]
+        },
+        {
+            id: 'react-tables',
+            type: 'collapse',
+            title: 'React Table',
+            icon: icons.InsertRowAboveOutlined,
+            target: false,
+            children: [
+                {
+                    id: 'react-table-basic',
+                    type: 'item',
+                    title: 'Base',
+                    url: '/react-table/base',
+                    target: false
+                },
+                {
+                    id: 'react-table-sorting',
+                    type: 'item',
+                    title: 'Sorting',
+                    url: '/react-table/sorting',
+                    target: false
+                },
+                {
+                    id: 'react-table-filtering',
+                    type: 'item',
+                    title: 'Filtering',
+                    url: '/react-table/filtering',
+                    target: false
+                },
+                {
+                    id: 'react-table-grouping',
+                    type: 'item',
+                    title: 'Grouping',
+                    url: '/react-table/grouping',
+                    target: false
+                },
+                {
+                    id: 'react-table-pagination',
+                    type: 'item',
+                    title: 'Pagination',
+                    url: '/react-table/pagination',
+                    target: false
+                },
+                {
+                    id: 'react-table-row-selection',
+                    type: 'item',
+                    title: 'Row Selection',
+                    url: '/react-table/row-selection',
                     target: false
                 }
             ]

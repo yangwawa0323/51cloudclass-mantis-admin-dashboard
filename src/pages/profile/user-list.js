@@ -66,6 +66,7 @@ const UserList = () => {
             headerName: 'Avatar',
             // headerCheckboxSelection: false,
             // checkboxSelection: true,
+            rowDrag: true,
             cellRenderer: avatarRenderer
         },
         { field: 'user.name', headerName: 'User Name' },
@@ -142,6 +143,7 @@ const UserList = () => {
                     isFullWidthRow={isFullWidthRow}
                     fullWidthCellRenderer={fullWidthCellRenderer}
                     onSelectionChanged={onSelectionChanged}
+                    rowDragManaged={true}
                     domLayout="autoHeight"
                 />
             </div>
