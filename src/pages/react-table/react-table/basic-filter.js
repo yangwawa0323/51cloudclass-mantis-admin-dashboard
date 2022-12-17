@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
-import { useTable } from 'react-table';
+import { useTable, useGlobalFilter } from 'react-table';
 
 import PropTypes from 'prop-types';
 import { Chip, LinearProgress, Box, Table, TableBody, TableCell, TableHead, TableRow, Typography, TableFooter } from '@mui/material';
 import styled from '@emotion/styled'; // is same sa material ui
+import GlobalFilterer from 'pages/react-table/react-table/global-filter';
 // import { styled } from '@mui/material/styles';
+import { useMemo } from 'react';
 
 const StyledTableRow = styled(TableRow)(({ theme, striped }) => {
     return {
         '&:nth-of-type(even)': {
             backgroundColor: striped == 1 ? 'rgb(250,250,250)' : ''
         }
-        // hide last border
-        // '&:last-child td, &:last-child th': {
-        //     border: 0
-        // }
     };
 });
 
@@ -48,12 +46,29 @@ export const ProgressCell = ({ value }) => (
     </Box>
 );
 
-const BasicTable = ({ columns, data, striped }) => {
-    const { headerGroups, footerGroups, getTableBodyProps, getTableProps, rows, prepareRow } = useTable({ columns, data });
+const BasicFilterTable = ({ columns, data, striped }) => {
+    const { headerGroups, footerGroups, getTableBodyProps, getTableProps, state, setGlobalFilter, rows, prepareRow } = useTable(
+        { columns, data },
+        useGlobalFilter
+    );
+
+    const { globalFilter } = state;
+
+    const spring = React.useMemo(
+        () => ({
+            type: 'spring',
+            damping: 50,
+            stiffness: 100
+        }),
+        []
+    );
 
     return (
-        <div style={{ overflowX: 'auto' }}>
-            <Table {...getTableProps()}>
+        <div style={{ overflowX: 'auto', display: 'flex', gap: '24px', flexDirection: 'column' }}>
+            <div>
+                <GlobalFilterer filter={globalFilter} setFilter={setGlobalFilter} />
+            </div>
+            <Table {...getTableProps()} sx={{ minWidth: '933px', width: '100%' }}>
                 <TableHead
                     sx={{
                         backgroundColor: 'rgb(250,250,250)',
@@ -71,15 +86,15 @@ const BasicTable = ({ columns, data, striped }) => {
                         </TableRow>
                     ))}
                 </TableHead>
-                <TableBody>
-                    {rows.map((row) => {
+                <TableBody {...getTableBodyProps()}>
+                    {rows.slice(0, 10).map((row, i) => {
                         prepareRow(row);
                         return (
-                            <StyledTableRow {...row.getRowProps()} striped={striped ? 1 : 0}>
-                                {row.cells.map((cell) => (
-                                    <TableCell {...cell.getCellProps()}>{cell.render('Cell')} </TableCell>
-                                ))}
-                            </StyledTableRow>
+                            <TableRow {...row.getRowProps()}>
+                                {row.cells.map((cell, i) => {
+                                    return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>;
+                                })}
+                            </TableRow>
                         );
                     })}
                 </TableBody>
@@ -96,10 +111,10 @@ const BasicTable = ({ columns, data, striped }) => {
         </div>
     );
 };
-BasicTable.propTypes = {
+BasicFilterTable.propTypes = {
     columns: PropTypes.arrayOf(PropTypes.object),
     data: PropTypes.arrayOf(PropTypes.object),
     striped: PropTypes.bool
 };
 
-export default BasicTable;
+export default BasicFilterTable;

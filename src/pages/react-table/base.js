@@ -58,6 +58,13 @@ const Base = () => {
         []
     );
 
+    const withFooterColumns = useMemo(() => [
+        ...columns.map((col) => ({
+            ...col,
+            Footer: col.Header
+        }))
+    ]);
+
     return (
         <Grid container spacing={{ xs: 4 }}>
             <Grid item xs={12} md={6}>
@@ -71,7 +78,14 @@ const Base = () => {
                 <Card>
                     <CardHeader title="Stripe table"></CardHeader>
                     <Divider />
-                    {data && <BasicTable columns={columns} data={data} />}
+                    {data && <BasicTable columns={columns} data={data} striped />}
+                </Card>
+            </Grid>
+            <Grid item xs={12}>
+                <Card>
+                    <CardHeader title="With footer table"></CardHeader>
+                    <Divider />
+                    {data && <BasicTable columns={withFooterColumns} data={data} striped />}
                 </Card>
             </Grid>
         </Grid>
