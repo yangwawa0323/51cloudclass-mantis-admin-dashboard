@@ -58,12 +58,16 @@ const Base = () => {
         []
     );
 
-    const withFooterColumns = useMemo(() => [
-        ...columns.map((col) => ({
-            ...col,
-            Footer: col.Header
-        }))
-    ]);
+    const withFooterColumns = useMemo(
+        () => [
+            ...columns.map((col) => ({
+                ...col,
+                Footer: col.Header
+            }))
+        ],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    );
 
     return (
         <Grid container spacing={{ xs: 4 }}>

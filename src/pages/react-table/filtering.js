@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, Divider, Grid, OutlinedInput } from '@mui/material';
 import React, { useState, useEffect, useMemo } from 'react';
-import BasicFilterTable, { ProgressCell, StatusCell } from 'pages/react-table/react-table/basic-filter';
+import BasicFilterTable from 'pages/react-table/react-table/basic-filter';
 import axios from 'axios';
+import { StatusCell, ProgressCell } from 'pages/react-table/react-table/basic';
 
 const Filtering = () => {
     const [data, setData] = useState(null);

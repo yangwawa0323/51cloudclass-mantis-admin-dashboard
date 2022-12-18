@@ -18,6 +18,6 @@ const GlobalFilterer = ({ filter, setFilter }) => {
 
 GlobalFilterer.propTypes = {
     filter: PropTypes.string,
-    setFitler: PropTypes.func
+    setFilter: PropTypes.func
 };
 export default GlobalFilterer;

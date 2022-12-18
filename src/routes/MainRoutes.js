@@ -20,6 +20,7 @@ import Filtering from 'pages/react-table/filtering';
 import Grouping from 'pages/react-table/grouping';
 import Pagination from 'pages/react-table/pagination';
 import RowSelection from 'pages/react-table/row-selection';
+import KanBan from 'pages/kanban/kanban';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -93,6 +94,10 @@ const MainRoutes = {
                 {
                     path: 'shadow',
                     element: <Shadow />
+                },
+                {
+                    path: 'kanban',
+                    element: <KanBan />
                 },
                 {
                     path: 'typography',

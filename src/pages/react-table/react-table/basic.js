@@ -18,7 +18,7 @@ const StyledTableRow = styled(TableRow)(({ theme, striped }) => {
     };
 });
 
-export const StatusCell = ({ value, columnProps }) => {
+const StatusCell = ({ value, columnProps }) => {
     return (
         <Chip
             sx={{
@@ -37,7 +37,12 @@ export const StatusCell = ({ value, columnProps }) => {
     );
 };
 
-export const ProgressCell = ({ value }) => (
+StatusCell.propTypes = {
+    value: PropTypes.string,
+    columnProps: PropTypes.object
+};
+
+const ProgressCell = ({ value }) => (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ width: '100%', mr: 1 }}>
             <LinearProgress variant="determinate" value={value} />
@@ -47,6 +52,10 @@ export const ProgressCell = ({ value }) => (
         </Box>
     </Box>
 );
+
+ProgressCell.propTypes = {
+    value: PropTypes.number
+};
 
 const BasicTable = ({ columns, data, striped }) => {
     const { headerGroups, footerGroups, getTableBodyProps, getTableProps, rows, prepareRow } = useTable({ columns, data });
@@ -103,3 +112,5 @@ BasicTable.propTypes = {
 };
 
 export default BasicTable;
+
+export { StatusCell, ProgressCell };

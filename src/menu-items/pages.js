@@ -1,12 +1,13 @@
 // assets
-import { LoginOutlined, ProfileOutlined, UserOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
+import { LoginOutlined, ProfileOutlined, UserOutlined, InsertRowAboveOutlined, BuildOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
     LoginOutlined,
     ProfileOutlined,
     UserOutlined,
-    InsertRowAboveOutlined
+    InsertRowAboveOutlined,
+    BuildOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -33,6 +34,14 @@ const pages = {
             target: true
         },
         {
+            id: 'kanban',
+            title: 'KanBan',
+            type: 'item',
+            url: '/kanban',
+            icon: icons.BuildOutlined,
+            target: false
+        },
+        {
             id: 'profile',
             type: 'collapse',
             title: 'Profile',
@@ -47,6 +56,7 @@ const pages = {
                     url: '/user-profile',
                     target: false
                 },
+
                 {
                     id: 'user-card-list',
                     type: 'item',
