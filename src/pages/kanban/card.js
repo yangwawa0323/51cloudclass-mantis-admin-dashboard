@@ -1,67 +1,49 @@
-import {
-    Card,
-    CardContent,
-    CardActions,
-    Button,
-    Grid,
-    IconButton,
-    Link,
-    OutlinedInput,
-    TextField,
-    Typography,
-    formControlClasses
-} from '@mui/material';
+import { Card, Button, Grid, IconButton, Link, OutlinedInput, Menu, MenuItem, Typography, CardMedia } from '@mui/material';
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { CalculatorOutlined, ClusterOutlined, DeleteOutlined, MoreOutlined, TeamOutlined, CloseOutlined } from '@ant-design/icons';
+import {
+    CalculatorOutlined,
+    ClusterOutlined,
+    DeleteOutlined,
+    MoreOutlined,
+    TeamOutlined,
+    CloseOutlined,
+    EditOutlined
+} from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
-import { keys } from 'lodash';
-import uuid from 'react-uuid';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
+import { removeTask, toggleDrawer } from '../../store/reducers/kanbanSlice';
+import { OutlinedInputWithoutBorder, StyledCard, StyledTask, AddNewButton } from './styled-components';
 
-const StyledCard = styled.div`
-    min-width: 250px;
-    border: 1px solid rgb(240, 240, 240);
-    border-raduis: 4px;
-    user-select: none;
-    margin: 0px 16px 0px 0px;
-    height: 100%;
-    background-color: rgb(245, 245, 245);
-    flex: 1;
-`;
-
-const StyledTask = styled.div`
-    background-color: rgb(255, 255, 255);
-    border-radius: 4px;
-    margin: 16px;
-    padding: 16px;
-`;
-
-const OutlinedInputWithoutBorder = styled(OutlinedInput)((props) => ({
-    '& fieldset': {
-        border: 'none'
-    }
-}));
-
-const AddNewTaskButton = styled(Button)`
-    color: rgb(140, 140, 140);
-    border-color: rgb(140, 140, 140);
-    background-color: rgb(245, 245, 245);
-    border: 1px dashed rgb(24, 144, 255);
-    width: calc(80% - 16px);
-    align-self: center;
-`;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 const KanBanCard = (props) => {
     const { index, card, tasks, addNewTaskToCard } = props;
     const [newAction, setNewAction] = useState(null);
     const [formData, setFormData] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const dispatch = useDispatch();
 
     const handleAddNewTaskToCard = () => {
         addNewTaskToCard(card, formData);
         setFormData(null);
         setNewAction(null);
+    };
+
+    const showActionMenu = (target, taskId) => {
+        setAnchorEl({ target, taskId });
+    };
+    const closeActionMenu = () => setAnchorEl(null);
+
+    const edit = () => {
+        dispatch(toggleDrawer({ drawerOpen: true, taskId: anchorEl.taskId, cardId: card.id }));
+        setAnchorEl(null);
+    };
+    const remove = () => {
+        dispatch(removeTask({ taskId: anchorEl.taskId, cardId: card.id }));
+        setAnchorEl(null);
     };
 
     return (
@@ -101,14 +83,13 @@ const KanBanCard = (props) => {
                                                             overflow: 'hidden',
                                                             whiteSpace: 'nowrap',
                                                             display: 'inline-block',
-                                                            textOverflow: 'ellipsis',
-                                                            width: 'calc(100% - 34px)'
+                                                            textOverflow: 'ellipsis'
                                                         }}
                                                         variant="subtitle1"
                                                     >
                                                         {task.title}
                                                     </Typography>
-                                                    <IconButton>
+                                                    <IconButton onClick={(e) => showActionMenu(e.currentTarget, task.id)}>
                                                         <MoreOutlined />
                                                     </IconButton>
                                                 </div>
@@ -127,6 +108,20 @@ const KanBanCard = (props) => {
                                                         User Story: #{task.userStory}
                                                     </Link>
                                                 </div>
+                                                {task.image && (
+                                                    <div>
+                                                        <img
+                                                            style={{
+                                                                backgroundSize: 'cover',
+                                                                objectFit: 'cover',
+                                                                width: '100%',
+                                                                borderRadius: '4px'
+                                                            }}
+                                                            src={task.image}
+                                                            alt={task.title}
+                                                        />
+                                                    </div>
+                                                )}
                                             </StyledTask>
                                         )}
                                     </Draggable>
@@ -172,12 +167,43 @@ const KanBanCard = (props) => {
                                                 </Grid>
                                             </Grid>
                                         </Card>
-                                    )) || <AddNewTaskButton onClick={() => setNewAction(card)}>Add task</AddNewTaskButton>}
+                                    )) || <AddNewButton onClick={() => setNewAction(card)}>Add task</AddNewButton>}
                                 </Grid>
                             </Grid>
                         </Grid>
                     )}
                 </Droppable>
+                <div>
+                    <Menu
+                        elevation={2}
+                        id="basic-menu"
+                        anchorEl={anchorEl?.target}
+                        open={Boolean(anchorEl)}
+                        onClose={closeActionMenu}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button'
+                        }}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left'
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left'
+                        }}
+                    >
+                        <MenuItem onClick={edit}>
+                            <IconButton>
+                                <EditOutlined />
+                            </IconButton>
+                        </MenuItem>
+                        <MenuItem onClick={remove}>
+                            <IconButton color="error">
+                                <DeleteOutlined />
+                            </IconButton>
+                        </MenuItem>
+                    </Menu>
+                </div>
             </Grid>
         </StyledCard>
     );
