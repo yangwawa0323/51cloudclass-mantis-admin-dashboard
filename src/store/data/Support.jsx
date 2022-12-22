@@ -9,7 +9,7 @@ const icons = {
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
-const support = {
+const Support = {
     id: 'support',
     title: 'Support',
     type: 'group',
@@ -33,4 +33,4 @@ const support = {
     ]
 };
 
-export default support;
+export default Support;

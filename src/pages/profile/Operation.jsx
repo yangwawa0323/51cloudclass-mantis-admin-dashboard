@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './operation.css';
-import EditUserProfile from './edit-user-profile';
+import EditUserProfile from './EditUserProfile';
 
 const EditBtnGroup = (props) => {
     const { node } = props;
@@ -10,7 +10,6 @@ const EditBtnGroup = (props) => {
 
     const editUserProfile = () => {
         setOpenEditUserProfile(true);
-        // console.log('[****DEBUG****]: editUserProfile clicked');
     };
 
     return (

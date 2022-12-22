@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 
 const PublicRoute = () => {
     const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
-    const isAuthenticted = isLoggedIn && localStorage.getItem('token');
-
-    return isAuthenticted ? <Navigate to="/dashboard/default" /> : <Outlet />;
+    const isAuthenticated = isLoggedIn && localStorage.getItem('token');
+    // const isAuthenticated = true;
+    return isAuthenticated ? <Navigate to="/dashboard/default" /> : <Outlet />;
 };
 
 export default PublicRoute;

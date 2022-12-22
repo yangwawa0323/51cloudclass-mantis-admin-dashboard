@@ -4,23 +4,24 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import PrivateRoute from './PrivateRoute';
-import UserProfile from 'pages/profile/user-profile';
-import AccountProfile from 'pages/profile/account-profile';
-import UserList from 'pages/profile/user-list';
-import UserCard from 'pages/profile/user-card';
-import Profile from 'pages/profile/profile';
-import UserCardList from 'pages/profile/user-card-list';
-import CopyTOClipboard from 'pages/plugins/copy-to-clipboard';
-import Mask from 'pages/plugins/mask';
+import UserProfile from 'pages/profile/UserProfile';
+import AccountProfile from 'pages/profile/AccountProfile';
+import UserList from 'pages/profile/UserList';
+import UserCard from 'pages/profile/UserCard';
+import Profile from 'pages/profile/Profile';
+import UserCardList from 'pages/profile/UserCardList';
+import CopyTOClipboard from 'pages/plugins/CopyToClipboard';
+import Mask from 'pages/plugins/Mask';
 
 // react table component
-import Base from 'pages/react-table/base';
-import Sorting from 'pages/react-table/sorting';
-import Filtering from 'pages/react-table/filtering';
-import Grouping from 'pages/react-table/grouping';
-import Pagination from 'pages/react-table/pagination';
-import RowSelection from 'pages/react-table/row-selection';
-import KanBan from 'pages/kanban/kanban';
+import Base from 'pages/react-table/Base';
+import Sorting from 'pages/react-table/Sorting';
+import Filtering from 'pages/react-table/Filter';
+import Grouping from 'pages/react-table/Grouping';
+import Pagination from 'pages/react-table/Pagnation';
+import RowSelection from 'pages/react-table/RowSelection';
+import KanBan from 'pages/kanban/KanBan';
+import MyDropZone from 'pages/dropzone/DropZone';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -38,7 +39,7 @@ const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons'
 
 const MainRoutes = {
     path: '/',
-    element: <PrivateRoute />,
+    // element: <PrivateRoute />,
     children: [
         {
             path: '/',
@@ -51,6 +52,10 @@ const MainRoutes = {
                 {
                     path: 'color',
                     element: <Color />
+                },
+                {
+                    path: 'dropzone',
+                    element: <MyDropZone />
                 },
                 {
                     path: 'dashboard',
@@ -152,8 +157,8 @@ const MainRoutes = {
                     ]
                 }
             ]
-        }
-    ]
+        } // disable private route
+    ] // disable private route
 };
 
 export default MainRoutes;

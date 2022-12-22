@@ -1,5 +1,5 @@
 // assets
-import { LoginOutlined, ProfileOutlined, UserOutlined, InsertRowAboveOutlined, BuildOutlined } from '@ant-design/icons';
+import { LoginOutlined, ProfileOutlined, DropboxOutlined, UserOutlined, InsertRowAboveOutlined, BuildOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
@@ -7,7 +7,8 @@ const icons = {
     ProfileOutlined,
     UserOutlined,
     InsertRowAboveOutlined,
-    BuildOutlined
+    BuildOutlined,
+    DropboxOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -137,6 +138,14 @@ const pages = {
                     target: false
                 }
             ]
+        },
+        {
+            id: 'dropzone',
+            type: 'item',
+            title: 'Drop Zone',
+            icon: icons.DropboxOutlined,
+            url: '/dropzone',
+            target: false
         },
         {
             id: 'plugins',

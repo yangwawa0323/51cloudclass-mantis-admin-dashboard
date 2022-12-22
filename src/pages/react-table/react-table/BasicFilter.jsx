@@ -4,7 +4,7 @@ import { useTable, useGlobalFilter } from 'react-table';
 import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography, TableFooter } from '@mui/material';
 import styled from '@emotion/styled'; // is same sa material ui
-import GlobalFilterer from 'pages/react-table/react-table/global-filter';
+import GlobalFilterer from 'pages/react-table/react-table/GlobalFilter';
 // import { styled } from '@mui/material/styles';
 
 const StyledTableRow = styled(TableRow)(({ theme, striped }) => {

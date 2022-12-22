@@ -11,7 +11,7 @@ import { ModuleRegistry } from 'ag-grid-community';
 import { Button, Checkbox, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import './user-profile.css';
 
-import EditBtnGroup from './operation';
+import EditBtnGroup from './Operation';
 
 // Register the required feature modules with the Grid
 ModuleRegistry.registerModules([ClientSideRowModelModule]);

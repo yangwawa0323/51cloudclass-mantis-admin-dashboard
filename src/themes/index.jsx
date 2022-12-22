@@ -6,9 +6,9 @@ import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // project import
-import Palette from './palette';
-import Typography from './typography';
-import CustomShadows from './shadows';
+import Palette from './Palette';
+import Typography from './Typography';
+import CustomShadows from './Shadows';
 import componentsOverride from './overrides';
 
 // ==============================|| DEFAULT THEME - MAIN  ||============================== //

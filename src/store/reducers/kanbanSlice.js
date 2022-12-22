@@ -2,7 +2,7 @@ import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { createSlice } from '@reduxjs/toolkit';
 import { findIndex } from 'lodash';
 import uuid from 'react-uuid';
-import { kanBanInitialData } from '../../pages/kanban/init-data';
+import { kanBanInitialData } from '../data/KanBanInitData';
 
 const kanban = createSlice({
     name: 'kanban',

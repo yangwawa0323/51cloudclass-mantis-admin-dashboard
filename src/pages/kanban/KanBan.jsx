@@ -1,8 +1,8 @@
-import { Grid, Tab, Tabs, Card, CardContent, Box, Button, Typography, Paper, IconButton } from '@mui/material';
+import { Grid, Tab, Tabs, Card, CardContent, Box } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import { keys, find, findIndex } from 'lodash';
-import KanBanCard from './card';
+import KanBanCard from './components/Card';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -10,60 +10,9 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { newTask, updateData } from '../../store/reducers/kanbanSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import EditDrawer from './edit-drawer';
-import { AddNewButton, OutlinedInputWithoutBorder, StyledCard } from './styled-components';
-import { CloseOutlined } from '@ant-design/icons';
-import { newCard } from '../../store/reducers/kanbanSlice';
+import EditDrawer from './components/EditDrawer';
 
-const AddColumn = (props) => {
-    const dispatch = useDispatch();
-
-    const [adding, setAdding] = useState(false);
-    const [value, setValue] = useState('');
-    const handleAddCard = () => {
-        setAdding(true);
-    };
-
-    const dispatchNewCard = () => {
-        dispatch(newCard({ title: value }));
-        setAdding(false);
-        setValue('');
-    };
-    return (
-        <StyledCard style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '10px 0px' }}>
-            {(adding && (
-                <Card sx={{ width: 'calc(100% - 34px)' }}>
-                    <CardContent>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12}>
-                                <OutlinedInputWithoutBorder
-                                    value={value}
-                                    onChange={(e) => setValue(e.target.value)}
-                                    fullWidth
-                                    placeholder="Add card"
-                                />
-                            </Grid>
-                            <Grid item xs={5}></Grid>
-                            <Grid item xs={7} display="flex" alignItems="center">
-                                <IconButton color="error" onClick={() => setAdding(false)}>
-                                    <CloseOutlined />
-                                </IconButton>
-                                <Button
-                                    onClick={dispatchNewCard}
-                                    variant="contained"
-                                    sx={{ height: '28px', marginRight: '6px' }}
-                                    color="primary"
-                                >
-                                    Add
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            )) || <AddNewButton onClick={handleAddCard}>Add Card</AddNewButton>}
-        </StyledCard>
-    );
-};
+import AddColumn from './components/AddColumn';
 
 const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
@@ -182,10 +131,6 @@ const KanBan = () => {
             // console.log('[DEBUG]: newData ', newData);
             dispatch(updateData({ kanban: newData }));
         }
-    };
-
-    const handleAddNewColumn = () => {
-        // dispatch(addNewCard({ cardId: uuid(), title: '' }));
     };
 
     return (

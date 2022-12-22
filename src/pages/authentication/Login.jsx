@@ -23,6 +23,13 @@ const Login = () => (
             <Grid item xs={12}>
                 <AuthLogin />
             </Grid>
+            <Grid item xs={12} justifyContent="flex-end" display="flex">
+                <Link to={'/dashboard/default'} style={{ textDecoration: 'none' }}>
+                    <Typography color="error" variant="h5">
+                        Demo Login
+                    </Typography>
+                </Link>
+            </Grid>
         </Grid>
     </AuthWrapper>
 );

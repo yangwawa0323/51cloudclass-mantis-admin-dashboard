@@ -9,9 +9,9 @@ import 'ag-grid-community/styles/ag-theme-material.css'; // Optional theme CSS
 import styled from '@emotion/styled';
 
 import { createApi } from 'unsplash-js';
-import EditBtnGroup from './operation';
+import EditBtnGroup from './Operation';
 import './user-profile.css';
-import Profile from './profile';
+import Profile from './Profile';
 import { Button, Chip } from '@mui/material';
 
 const StyledMain = styled.div((prop) => ({

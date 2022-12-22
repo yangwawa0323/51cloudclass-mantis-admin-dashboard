@@ -5,7 +5,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import InputIpAddress from './ip-address';
+import InputIpAddress from './IPAddress';
 
 const Mask = () => {
     const [value, setValue] = React.useState(dayjs(new Date().toUTCString()));

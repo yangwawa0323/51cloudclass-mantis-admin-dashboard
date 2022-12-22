@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Grid, Card, CardContent, CardHeader, Button, Paper, Typography, Divider } from '@mui/material';
-import BasicTable, { ProgressCell, StatusCell } from './react-table/basic';
+import BasicTable, { ProgressCell, StatusCell } from './react-table/Basic';
 import axios from 'axios';
 
 const Base = () => {

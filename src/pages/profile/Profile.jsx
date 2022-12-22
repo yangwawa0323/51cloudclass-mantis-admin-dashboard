@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import styled from '@emotion/styled';
 import Avatar from '@mui/material/Avatar';
-import StyledMain from 'pages/main';
+import StyledMain from 'pages/StyledMain';
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined, LinkOutlined, UpSquareOutlined } from '@ant-design/icons';
 import Typography from '@mui/material/Typography';
 

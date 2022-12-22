@@ -14,8 +14,8 @@ import PropTypes from 'prop-types';
 
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
-import { removeTask, toggleDrawer } from '../../store/reducers/kanbanSlice';
-import { OutlinedInputWithoutBorder, StyledCard, StyledTask, AddNewButton } from './styled-components';
+import { removeTask, toggleDrawer } from '../../../store/reducers/kanbanSlice';
+import { OutlinedInputWithoutBorder, StyledCard, StyledTask, AddNewButton } from './StyledComponents';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 const KanBanCard = (props) => {
