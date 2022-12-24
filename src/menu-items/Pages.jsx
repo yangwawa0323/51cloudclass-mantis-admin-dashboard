@@ -1,5 +1,13 @@
 // assets
-import { LoginOutlined, ProfileOutlined, DropboxOutlined, UserOutlined, InsertRowAboveOutlined, BuildOutlined } from '@ant-design/icons';
+import {
+    LoginOutlined,
+    ProfileOutlined,
+    DatabaseOutlined,
+    DropboxOutlined,
+    UserOutlined,
+    InsertRowAboveOutlined,
+    BuildOutlined
+} from '@ant-design/icons';
 
 // icons
 const icons = {
@@ -8,6 +16,7 @@ const icons = {
     UserOutlined,
     InsertRowAboveOutlined,
     BuildOutlined,
+    DatabaseOutlined,
     DropboxOutlined
 };
 
@@ -33,6 +42,14 @@ const pages = {
             url: '/register',
             icon: icons.ProfileOutlined,
             target: true
+        },
+        {
+            id: 'dataview',
+            title: 'Data',
+            type: 'item',
+            url: '/data-view',
+            icon: icons.DatabaseOutlined,
+            target: false
         },
         {
             id: 'kanban',

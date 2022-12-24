@@ -10,6 +10,9 @@ import './style.css';
 import styled from '@emotion/styled';
 
 import { ModuleRegistry } from 'ag-grid-community';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+
 // Register the required feature modules with the Grid
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -30,7 +33,13 @@ function MyRenderer(params) {
     );
 }
 
+const getUserCard = async () => {
+    return axios.get('https://www.ag-grid.com/example-assets/olympic-winners.json');
+};
+
 function UserCard() {
+    const { data } = useQuery('user-card', getUserCard);
+    const rowData = data?.data;
     // never changes, so we can use useMemo
     const columnDefs = useMemo(
         () => [
@@ -58,14 +67,14 @@ function UserCard() {
     );
 
     // changes, needs to be state
-    const [rowData, setRowData] = useState();
+    // const [rowData, setRowData] = useState();
 
-    // gets called once, no dependencies, loads the grid data
-    useEffect(() => {
-        fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
-    }, []);
+    // // gets called once, no dependencies, loads the grid data
+    // useEffect(() => {
+    //     fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+    //         .then((resp) => resp.json())
+    //         .then((data) => setRowData(data));
+    // }, []);
 
     return (
         <StyledMain>

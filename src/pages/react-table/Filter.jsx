@@ -3,19 +3,17 @@ import React, { useState, useEffect, useMemo } from 'react';
 import BasicFilterTable from './react-table/BasicFilter';
 import axios from 'axios';
 import { StatusCell, ProgressCell } from './/react-table/Basic';
+import { useQuery } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const Filtering = () => {
-    const [data, setData] = useState(null);
-
     const fetchTableData = async () => {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users').catch((err) => console.log(err));
-        const data = await response.data;
-        setData(data);
+        return await axios.get('https://jsonplaceholder.typicode.com/users');
     };
 
-    useEffect(() => {
-        fetchTableData();
-    }, []);
+    const { data: fetchData } = useQuery('table-filter', fetchTableData);
+
+    const data = fetchData?.data;
 
     const columns = useMemo(
         () => [
@@ -66,6 +64,7 @@ const Filtering = () => {
                     <CardContent>{data && <BasicFilterTable columns={columns} data={data} />}</CardContent>
                 </Card>
             </Grid>
+            <ReactQueryDevtools />
         </Grid>
     );
 };

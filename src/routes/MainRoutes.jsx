@@ -9,19 +9,30 @@ import AccountProfile from 'pages/profile/AccountProfile';
 import UserList from 'pages/profile/UserList';
 import UserCard from 'pages/profile/UserCard';
 import Profile from 'pages/profile/Profile';
-import UserCardList from 'pages/profile/UserCardList';
-import CopyTOClipboard from 'pages/plugins/CopyToClipboard';
-import Mask from 'pages/plugins/Mask';
+
+const UserCardList = Loadable(lazy(() => import('pages/profile/UserCardList')));
+const CopyToClipboard = Loadable(lazy(() => import('pages/plugins/CopyToClipboard')));
+const Mask = Loadable(lazy(() => import('pages/plugins/Mask')));
 
 // react table component
 import Base from 'pages/react-table/Base';
-import Sorting from 'pages/react-table/Sorting';
 import Filtering from 'pages/react-table/Filter';
-import Grouping from 'pages/react-table/Grouping';
 import Pagination from 'pages/react-table/Pagnation';
 import RowSelection from 'pages/react-table/RowSelection';
-import KanBan from 'pages/kanban/KanBan';
-import MyDropZone from 'pages/dropzone/DropZone';
+
+const DataView = Loadable(lazy(() => import('pages/data/DataView')));
+
+// render - sorting
+const Sorting = Loadable(lazy(() => import('pages/react-table/Sorting')));
+
+// render - grouping
+const Grouping = Loadable(lazy(() => import('pages/react-table/Grouping')));
+
+// render - kanban
+const KanBan = Loadable(lazy(() => import('pages/kanban/KanBan')));
+
+// render - drop zone
+const MyDropZone = Loadable(lazy(() => import('pages/dropzone/DropZone')));
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -65,6 +76,10 @@ const MainRoutes = {
                             element: <DashboardDefault />
                         }
                     ]
+                },
+                {
+                    path: 'data-view',
+                    element: <DataView />
                 },
                 // User
                 {
@@ -118,7 +133,7 @@ const MainRoutes = {
                     children: [
                         {
                             path: 'copy-to-clipboard',
-                            element: <CopyTOClipboard />
+                            element: <CopyToClipboard />
                         },
                         {
                             path: 'mask',

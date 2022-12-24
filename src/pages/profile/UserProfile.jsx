@@ -12,6 +12,9 @@ import { Button, Checkbox, Select, MenuItem, FormControl, InputLabel } from '@mu
 import './user-profile.css';
 
 import EditBtnGroup from './Operation';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Register the required feature modules with the Grid
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -34,9 +37,15 @@ function MyRenderer(params) {
 }
 
 function UserProfile() {
-    const [rowData, setRowData] = useState([]);
     const [sortby, setSortBy] = useState('');
     const gridRef = useRef(null);
+
+    const getData = async () => {
+        return await axios.get('https://www.ag-grid.com/example-assets/master-detail-data.json');
+    };
+
+    const { data: fetchData } = useQuery('user-profile', getData);
+    var rowData = fetchData?.data;
 
     const handleCellValueChanged = (params) => {
         if (params.oldValue !== params.newValue) {
@@ -47,11 +56,16 @@ function UserProfile() {
             };
             params.data.cell = cell;
 
+            // var tempRowData = rowData; // useState variable is immutable
             const index = rowData.findIndex((cell) => cell.account == params.data.account);
+            // tempRowData[index] = params.data;
+            rowData[index] = params.data;
+            // setRowData((draft) => {
+            //     rowData[index] = params.data;
+            // });
 
-            var tempRowData = rowData; // useState variable is immutable
-            tempRowData[index] = params.data;
-            setRowData(tempRowData);
+            // TODO:
+            // setRowData(tempRowData);
 
             var column = params.colDef.field;
 
@@ -62,18 +76,6 @@ function UserProfile() {
             });
         }
     };
-
-    useEffect(() => {
-        const getData = async () => {
-            fetch('https://www.ag-grid.com/example-assets/master-detail-data.json')
-                .then((resp) => resp.json())
-                .then((data) => {
-                    setRowData(data);
-                    // setTimeout(() => gridRef.current.api.getDisplayedRowAtIndex(1).setExpanded(true), 100);
-                });
-        };
-        getData();
-    }, []);
 
     const cellChanged = useCallback((params) => {
         var changed = params.data.cell?.hasBeenChanged && params.data.cell?.rowIndex == params.rowIndex;
@@ -181,6 +183,7 @@ function UserProfile() {
                 domLayout="autoHeight"
                 rowData={rowData}
             />
+            <ReactQueryDevtools />
         </div>
     );
 }

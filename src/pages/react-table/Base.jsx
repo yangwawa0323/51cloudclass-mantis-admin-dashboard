@@ -2,20 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Grid, Card, CardContent, CardHeader, Button, Paper, Typography, Divider } from '@mui/material';
 import BasicTable, { ProgressCell, StatusCell } from './react-table/Basic';
 import axios from 'axios';
+import { Query, useQuery } from 'react-query';
 
 const Base = () => {
-    const [data, setData] = useState(null);
-
     const fetchTableData = async () => {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users').catch((err) => console.log(err));
-        const data = await response.data;
-        setData(data);
-        console.log('[DEBUG] base: ', data);
+        return await axios.get('https://jsonplaceholder.typicode.com/users').catch((err) => console.log(err));
     };
 
-    useEffect(() => {
-        fetchTableData();
-    }, []);
+    const { data, isLoading, isError } = useQuery('base-react-table', fetchTableData);
 
     const columns = useMemo(
         () => [
@@ -75,21 +69,21 @@ const Base = () => {
                 <Card>
                     <CardHeader title="Basic table"></CardHeader>
                     <Divider />
-                    {data && <BasicTable columns={columns} data={data} />}
+                    {data?.data && <BasicTable columns={columns} data={data.data} />}
                 </Card>
             </Grid>
             <Grid item xs={12} md={6}>
                 <Card>
                     <CardHeader title="Stripe table"></CardHeader>
                     <Divider />
-                    {data && <BasicTable columns={columns} data={data} striped />}
+                    {data?.data && <BasicTable columns={columns} data={data.data} striped />}
                 </Card>
             </Grid>
             <Grid item xs={12}>
                 <Card>
                     <CardHeader title="With footer table"></CardHeader>
                     <Divider />
-                    {data && <BasicTable columns={withFooterColumns} data={data} striped />}
+                    {data?.data && <BasicTable columns={withFooterColumns} data={data.data} striped />}
                 </Card>
             </Grid>
         </Grid>

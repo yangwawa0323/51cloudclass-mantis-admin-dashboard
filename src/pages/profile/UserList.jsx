@@ -13,6 +13,7 @@ import EditBtnGroup from './Operation';
 import './user-profile.css';
 import Profile from './Profile';
 import { Button, Chip } from '@mui/material';
+import { useQuery } from 'react-query';
 
 const StyledMain = styled.div((prop) => ({
     padding: '10px 40px',
@@ -39,7 +40,6 @@ const RandomStatus = (props) => {
 
 const UserList = () => {
     const gridRef = useRef(); // Optional - for accessing Grid's API
-    const [rowData, setRowData] = useState(); // Set rowData to Array of Objects, one Object per Row
 
     const avatarRenderer = (params) => {
         return (
@@ -82,20 +82,15 @@ const UserList = () => {
         flex: 1
     }));
 
-    // Example load data from sever
-    useEffect(() => {
+    const fectchRows = async () => {
         const unsplash = createApi({
             accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY
         });
-        unsplash.collections.list({ page: 1 }).then((response) => {
-            if (response.status === 200) {
-                var {
-                    response: { results }
-                } = response;
-                setRowData(results);
-            }
-        });
-    }, []);
+        return unsplash.collections.list({ page: 1 });
+    };
+
+    const { data, isLoading } = useQuery('user-list', fectchRows);
+    const rowData = data?.response.results;
 
     const getRowHeight = useCallback((params) => {
         let rowHeight = params.node.selected ? 600 : 47;
@@ -132,20 +127,22 @@ const UserList = () => {
             <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', paddingRight: '40px' }}></div>
             {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
             <div className="ag-theme-material" style={{ width: 'auto', height: '100%' }}>
-                <AgGridReact
-                    ref={gridRef} // Ref for accessing Grid's API
-                    rowData={rowData} // Row Data for Rows
-                    columnDefs={columnDefs} // Column Defs for Columns
-                    defaultColDef={defaultColDef} // Default Column Properties
-                    animateRows={true} // Optional - set to 'true' to have rows animate when sorted
-                    // rowSelection="single" // Options - allows click selection of rows
-                    // getRowHeight={getRowHeight}
-                    isFullWidthRow={isFullWidthRow}
-                    fullWidthCellRenderer={fullWidthCellRenderer}
-                    onSelectionChanged={onSelectionChanged}
-                    rowDragManaged={true}
-                    domLayout="autoHeight"
-                />
+                {rowData && (
+                    <AgGridReact
+                        ref={gridRef} // Ref for accessing Grid's API
+                        rowData={rowData} // Row Data for Rows
+                        columnDefs={columnDefs} // Column Defs for Columns
+                        defaultColDef={defaultColDef} // Default Column Properties
+                        animateRows={true} // Optional - set to 'true' to have rows animate when sorted
+                        // rowSelection="single" // Options - allows click selection of rows
+                        // getRowHeight={getRowHeight}
+                        isFullWidthRow={isFullWidthRow}
+                        fullWidthCellRenderer={fullWidthCellRenderer}
+                        onSelectionChanged={onSelectionChanged}
+                        rowDragManaged={true}
+                        domLayout="autoHeight"
+                    />
+                )}
             </div>
         </div>
     );
