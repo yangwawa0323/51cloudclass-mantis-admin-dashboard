@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { Grid, TableCell, TableHead } from '@mui/material';
+import { Grid, TableCell, TableHead, Typography } from '@mui/material';
 import { LoremIpsum, Avatar as LoremAvatar } from 'react-lorem-ipsum';
 
 const StyledMain = styled.div((prop) => ({
@@ -44,6 +44,35 @@ export const StyledLoremAvatar = styled(LoremAvatar)`
     height: 48pxl;
 `;
 
-export const StyledLorem = styled(LoremIpsum)``;
+const StyledLorem = styled(LoremIpsum)`
+    '& > p' : {
+        padding: 0px;
+        margin: 0px;
+    }
+`;
+
+export const StyledTypography = styled(Typography)`
+    & svg {
+        width: 36px;
+        height: 36px;
+        opacity: 0.5;
+        transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:hover svg {
+        width: 38px;
+        height: 38px;
+        opacity: 1;
+    }
+`;
+
+export const StyledLoremIpsum = (props, children) => {
+    const { words } = props;
+    return (
+        <StyledLorem avgWordsPerSentence={words} avgSentencesPerParagraph={0} startWithLoremIpsum={false}>
+            {children}
+        </StyledLorem>
+    );
+};
 
 export default StyledMain;

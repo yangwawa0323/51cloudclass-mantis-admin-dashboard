@@ -23,7 +23,7 @@ const StatusCell = ({ value, columnProps }) => {
         <Chip
             sx={{
                 color: value === 'rejected' ? 'rgb(255, 77, 79)' : value === 'pending' ? 'rgb(19, 194, 194)' : 'rgb(82, 196, 26)',
-                backgroundColor:
+                bgColor:
                     value === 'rejected'
                         ? 'rgb(255, 77, 79, 0.1)'
                         : value === 'pending'

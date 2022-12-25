@@ -17,7 +17,7 @@ import {
 
 import { LoremIpsum } from 'react-lorem-ipsum';
 
-import { StyledTableHead, StyledTableHeadCell, StyledLorem, StyledTableBodyCell } from '../../StyledMain';
+import { StyledTableHead, StyledTableHeadCell, StyledLoremIpsum, StyledTableBodyCell } from '../../StyledMain';
 
 const RecentTicket = () => {
     return (
@@ -42,7 +42,7 @@ const RecentTicket = () => {
                             {Array.from(Array(8).keys()).map((_, index) => (
                                 <TableRow key={index}>
                                     <StyledTableBodyCell size="small">
-                                        <StyledLorem avgWordsPerSentence={3} avgSentencesPerParagraph={0} startWithLoremIpsum={false} />
+                                        <StyledLoremIpsum words={3} />
                                     </StyledTableBodyCell>
                                     <StyledTableBodyCell size="small">Support</StyledTableBodyCell>
                                     <StyledTableBodyCell size="small">

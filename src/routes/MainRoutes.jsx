@@ -22,6 +22,8 @@ import RowSelection from 'pages/react-table/RowSelection';
 
 const DataView = Loadable(lazy(() => import('pages/data/DataView')));
 
+const Statistic = Loadable(lazy(() => import('pages/statistic/Statistic')));
+
 // render - sorting
 const Sorting = Loadable(lazy(() => import('pages/react-table/Sorting')));
 
@@ -59,6 +61,10 @@ const MainRoutes = {
                 {
                     path: '/',
                     element: <DashboardDefault />
+                },
+                {
+                    path: 'statistics',
+                    element: <Statistic />
                 },
                 {
                     path: 'color',

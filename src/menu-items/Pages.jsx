@@ -5,6 +5,7 @@ import {
     DatabaseOutlined,
     DropboxOutlined,
     UserOutlined,
+    IdcardOutlined,
     InsertRowAboveOutlined,
     BuildOutlined
 } from '@ant-design/icons';
@@ -17,6 +18,7 @@ const icons = {
     InsertRowAboveOutlined,
     BuildOutlined,
     DatabaseOutlined,
+    IdcardOutlined,
     DropboxOutlined
 };
 
@@ -42,6 +44,14 @@ const pages = {
             url: '/register',
             icon: icons.ProfileOutlined,
             target: true
+        },
+        {
+            id: 'statistic',
+            title: 'Statistics',
+            type: 'item',
+            url: '/statistics',
+            icon: icons.IdcardOutlined,
+            target: false
         },
         {
             id: 'dataview',

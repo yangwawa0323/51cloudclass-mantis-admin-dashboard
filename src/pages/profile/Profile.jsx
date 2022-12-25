@@ -66,7 +66,7 @@ const Profile = (props) => {
                             variant="outlined"
                             sx={{
                                 zIndex: 100,
-                                backgroundColor: 'white',
+                                bgColor: 'white',
                                 paddingLeft: '20px',
                                 paddingTop: '20px',
                                 position: 'relative'

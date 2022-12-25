@@ -32,7 +32,8 @@ const UserActivity = () => {
                                                 sx={{
                                                     '& .MuiBadge-badge': {
                                                         bottom: '14%',
-                                                        right: '14%'
+                                                        right: '14%',
+                                                        outline: '2px white solid'
                                                     }
                                                 }}
                                                 anchorOrigin={{
