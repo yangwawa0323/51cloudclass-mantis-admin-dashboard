@@ -7,7 +7,9 @@ import {
     UserOutlined,
     IdcardOutlined,
     InsertRowAboveOutlined,
-    BuildOutlined
+    BuildOutlined,
+    FileDoneOutlined,
+    ShoppingCartOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -19,7 +21,9 @@ const icons = {
     BuildOutlined,
     DatabaseOutlined,
     IdcardOutlined,
-    DropboxOutlined
+    DropboxOutlined,
+    FileDoneOutlined,
+    ShoppingCartOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -54,6 +58,14 @@ const pages = {
             target: false
         },
         {
+            id: 'form-validation',
+            title: 'Form Validation',
+            type: 'item',
+            url: '/form-validation',
+            icon: icons.FileDoneOutlined,
+            target: false
+        },
+        {
             id: 'dataview',
             title: 'Data',
             type: 'item',
@@ -70,6 +82,51 @@ const pages = {
             target: false
         },
         {
+            id: 'e-commerce',
+            type: 'collapse',
+            title: 'E-Commerce',
+            icon: icons.ShoppingCartOutlined,
+            url: '/e-commerce',
+            target: false,
+            children: [
+                {
+                    id: 'products',
+                    type: 'item',
+                    title: 'Products',
+                    url: '/e-commerce/products',
+                    target: false
+                },
+                {
+                    id: 'add-new-product',
+                    type: 'item',
+                    title: 'Add New Product',
+                    url: '/e-commerce/add-new-product',
+                    target: false
+                },
+                {
+                    id: 'checkout',
+                    type: 'item',
+                    title: 'Checkout',
+                    url: '/e-commerce/checkout',
+                    target: false
+                },
+                {
+                    id: 'product-detail',
+                    type: 'item',
+                    title: 'Product Detail',
+                    url: '/e-commerce/product-detail',
+                    target: false
+                },
+                {
+                    id: 'product-list',
+                    type: 'item',
+                    title: 'Product List',
+                    url: '/e-commerce/product-list',
+                    target: false
+                }
+            ]
+        },
+        {
             id: 'profile',
             type: 'collapse',
             title: 'Profile',
@@ -81,7 +138,7 @@ const pages = {
                     id: 'user-profile',
                     type: 'item',
                     title: 'User Profile',
-                    url: '/user-profile',
+                    url: '/profile/user-profile',
                     target: false
                 },
 
@@ -89,28 +146,28 @@ const pages = {
                     id: 'user-card-list',
                     type: 'item',
                     title: 'User Card List',
-                    url: '/user-card-list',
+                    url: '/profile/user-card-list',
                     target: false
                 },
                 {
                     id: 'account-profile',
                     type: 'item',
                     title: 'Account Profile',
-                    url: '/account-profile',
+                    url: '/profile/account-profile',
                     target: false
                 },
                 {
                     id: 'user-list',
                     type: 'item',
                     title: 'User List',
-                    url: '/user-list',
+                    url: '/profile/user-list',
                     target: false
                 },
                 {
                     id: 'user-card',
                     type: 'item',
                     title: 'User Card',
-                    url: '/user-card',
+                    url: '/profile/user-card',
                     target: false
                 }
             ]

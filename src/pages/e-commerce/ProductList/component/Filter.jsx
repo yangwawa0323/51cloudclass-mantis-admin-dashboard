@@ -1,0 +1,179 @@
+import React from 'react';
+import {
+    Card,
+    CardContent,
+    Grid,
+    CardHeader,
+    Divider,
+    Button,
+    Typography,
+    FormControlLabel,
+    Checkbox,
+    Avatar,
+    Box,
+    OutlinedInput,
+    Slider,
+    Rating,
+    Chip
+} from '@mui/material';
+
+import { grey } from '@mui/material/colors';
+
+import { ThinCheckbox } from '../../../StyledMain';
+import { useState } from 'react';
+import { CloseOutlined } from '@ant-design/icons';
+
+const colors = [
+    'rgb(145, 213, 255)',
+    'rgb(9, 109, 217)',
+    'rgb(240, 240, 240)',
+    'rgb(140, 140, 140)',
+    'rgb(149, 222, 100)',
+    'rgb(82, 196, 26)',
+    'rgb(35, 120, 4)',
+    'rgb(255, 163, 158)',
+    'rgb(255, 77, 79)',
+    'rgb(168, 7, 26)',
+    'rgb(250, 173, 20)',
+    'rgb(173, 104, 0)'
+];
+
+const ColorButton = (props) => {
+    const { bgColor } = props;
+    return (
+        <Button>
+            <Avatar
+                variant="circular"
+                src=""
+                sx={{
+                    '& .MuiSvgIcon-root': { visibility: 'hidden' },
+                    width: '28px',
+                    height: '28px',
+                    backgroundColor: bgColor
+                }}
+            />
+        </Button>
+    );
+};
+
+const Filter = () => {
+    const [sliderRange, setSliderRange] = useState([50, 436]);
+
+    const [rating, setRating] = useState(2);
+
+    const handleSliderChange = (event, newValue) => {
+        setSliderRange(newValue);
+    };
+
+    const handleRating = (event, newValue) => {
+        setRating(newValue);
+    };
+
+    return (
+        <Card variant="outlined">
+            <CardHeader title="Filter" />
+            <Divider />
+            <CardContent>
+                <Grid container spacing={4} maxWidth="238px">
+                    <Grid item xs={12}>
+                        <Typography variant="h5">Active Filters</Typography>
+                        <Grid container spacing={1} display="flex" direction="column">
+                            <Grid item>
+                                <Typography variant="h6">Colors</Typography>
+                                <Chip
+                                    sx={{
+                                        border: 'unset',
+                                        color: grey[500]
+                                    }}
+                                    variant="outlined"
+                                    label="Light Secondary"
+                                    onDelete={() => {}}
+                                    deleteIcon={
+                                        <CloseOutlined
+                                            style={{
+                                                fontSize: '12px'
+                                            }}
+                                        />
+                                    }
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Typography variant="h6">Price</Typography>
+                                <Chip
+                                    sx={{ border: 'unset', color: grey[500] }}
+                                    variant="outlined"
+                                    label={`${sliderRange[0]}-${sliderRange[1]}`}
+                                />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item display="flex" flexDirection="column" xs={12}>
+                        <Typography variant="h5">Gender</Typography>
+                        <FormControlLabel label="Male" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Female" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Kids" control={<ThinCheckbox />} />
+                    </Grid>
+                    <Grid item display="flex" flexDirection="column" xs={12}>
+                        <Typography variant="h5">Categories</Typography>
+                        <FormControlLabel label="All" control={<ThinCheckbox checked />} />
+                        <FormControlLabel label="Eletronics" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Fashion" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Book" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Toys" control={<ThinCheckbox />} />
+                        <FormControlLabel label="Home & Kitchen" control={<ThinCheckbox />} />
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="h5">Color</Typography>
+                        <Grid container>
+                            {colors.map((color, index) => (
+                                <Grid item xs={3} key={index}>
+                                    <ColorButton bgColor={color} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
+                    <Grid item sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <Typography variant="h5">Price</Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
+                            <Box>
+                                <Typography variant="body1" color="secondary">
+                                    Min
+                                </Typography>
+                                <OutlinedInput value={sliderRange[0]} />
+                            </Box>
+                            <Box>
+                                <Typography variant="body1" color="secondary">
+                                    Max
+                                </Typography>
+                                <OutlinedInput value={sliderRange[1]} />
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Slider
+                                sx={{
+                                    '& .MuiSlider-thumb': {
+                                        backgroundColor: 'white',
+                                        border: '2px solid currentcolor'
+                                    }
+                                }}
+                                onChange={handleSliderChange}
+                                value={sliderRange}
+                                size="small"
+                                max={999}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="h5">Rating</Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center' }}>
+                            <Rating value={rating} onChange={handleRating} />
+                            <Typography>({rating ? rating : 0})</Typography>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    );
+};
+
+export default Filter;

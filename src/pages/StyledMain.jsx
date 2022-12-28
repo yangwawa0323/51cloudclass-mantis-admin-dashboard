@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { Grid, TableCell, TableHead, Typography } from '@mui/material';
+import { Checkbox, Grid, SvgIcon, TableCell, TableHead, Typography } from '@mui/material';
 import { LoremIpsum, Avatar as LoremAvatar } from 'react-lorem-ipsum';
+import { CheckSquareFilled } from '@ant-design/icons';
+import { Box } from '@mui/system';
 
 const StyledMain = styled.div((prop) => ({
     padding: '10px 20px 40px 20px',
@@ -66,7 +68,35 @@ export const StyledTypography = styled(Typography)`
     }
 `;
 
+export const ThinCheckbox = (props) => (
+    <Checkbox
+        {...props}
+        sx={{
+            '& .MuiSvgIcon-root': {
+                width: '18px',
+                height: '18px'
+            }
+        }}
+        icon={<Box sx={{ borderRadius: '3px', margin: '2px', width: '14px', height: '14px', border: '1px solid #1C6EA4' }} />}
+        // checkedIcon={<CheckSquareFilled sx={{ width: '22px', height: '22px' }} />}
+    >
+        {props.children}
+    </Checkbox>
+);
+
+export const StyledLineThroughCheckbox = styled(ThinCheckbox)`
+    & svg {
+        border-width: 0px;
+        font-weight: 100;
+    };
+    &.Mui-checked + span'
+    { 
+        text-decoration: line-through; 
+    };
+`;
+
 export const StyledLoremIpsum = (props, children) => {
+    // eslint-disable-next-line react/prop-types
     const { words } = props;
     return (
         <StyledLorem avgWordsPerSentence={words} avgSentencesPerParagraph={0} startWithLoremIpsum={false}>

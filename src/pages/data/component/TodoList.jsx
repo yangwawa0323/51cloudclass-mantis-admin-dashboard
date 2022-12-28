@@ -13,6 +13,7 @@ import {
     IconButton
 } from '@mui/material';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { ThinCheckbox } from '../../StyledMain';
 
 const TodoList = () => {
     const [todoList, setTodoList] = useState({ 'check-your-email': true, 'make-youtube-video': true, 'create-banner': true });
@@ -44,15 +45,16 @@ const TodoList = () => {
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="check-your-email"
                                         checked={isChecked('check-your-email')}
                                         onChange={(e) => onChange(e)('check-your-email')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Check your email"
@@ -60,15 +62,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="make-youtube-video"
                                         checked={isChecked('make-youtube-video')}
                                         onChange={(e) => onChange(e)('make-youtube-video')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Make YouTube Video"
@@ -76,15 +79,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="create-banner"
                                         checked={isChecked('create-banner')}
                                         onChange={(e) => onChange(e)('create-banner')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Create Banner"
@@ -92,15 +96,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="upload-project"
                                         checked={isChecked('upload-project')}
                                         onChange={(e) => onChange(e)('upload-project')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Upload Project"
@@ -108,15 +113,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="update-task"
                                         checked={isChecked('update-task')}
                                         onChange={(e) => onChange(e)('update-task')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Update Task"
@@ -124,15 +130,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="task-issue"
                                         checked={isChecked('task-issue')}
                                         onChange={(e) => onChange(e)('task-issue')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Task Issue"
@@ -140,15 +147,16 @@ const TodoList = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
+                                sx={{
+                                    '& .Mui-checked + span': {
+                                        textDecoration: 'line-through'
+                                    }
+                                }}
                                 control={
-                                    <Checkbox
-                                        size="small"
+                                    <ThinCheckbox
                                         name="display-project"
                                         checked={isChecked('display-project')}
                                         onChange={(e) => onChange(e)('display-project')}
-                                        sx={{
-                                            '&.Mui-checked + span': { textDecoration: 'line-through' }
-                                        }}
                                     />
                                 }
                                 label="Display Project"

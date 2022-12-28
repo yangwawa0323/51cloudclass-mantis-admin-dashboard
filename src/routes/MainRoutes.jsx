@@ -20,6 +20,14 @@ import Filtering from 'pages/react-table/Filter';
 import Pagination from 'pages/react-table/Pagnation';
 import RowSelection from 'pages/react-table/RowSelection';
 
+const AddNewProduct = Loadable(lazy(() => import('pages/e-commerce/AddNewProduct')));
+const Checkout = Loadable(lazy(() => import('pages/e-commerce/Checkout')));
+const Products = Loadable(lazy(() => import('pages/e-commerce/Products')));
+const ProductDetail = Loadable(lazy(() => import('pages/e-commerce/ProductDetail')));
+const ProductList = Loadable(lazy(() => import('pages/e-commerce/ProductList')));
+
+const FormValidation = Loadable(lazy(() => import('pages/form-validation/FormValidation')));
+
 const DataView = Loadable(lazy(() => import('pages/data/DataView')));
 
 const Statistic = Loadable(lazy(() => import('pages/statistic/Statistic')));
@@ -67,6 +75,10 @@ const MainRoutes = {
                     element: <Statistic />
                 },
                 {
+                    path: 'form-validation',
+                    element: <FormValidation />
+                },
+                {
                     path: 'color',
                     element: <Color />
                 },
@@ -84,33 +96,60 @@ const MainRoutes = {
                     ]
                 },
                 {
+                    path: 'e-commerce',
+                    element: <ProductList />,
+                    children: [
+                        {
+                            path: 'checkout',
+                            element: <Checkout />
+                        },
+                        {
+                            path: 'product-list',
+                            element: <ProductList />
+                        },
+                        {
+                            path: 'product-detail',
+                            element: <ProductDetail />
+                        },
+                        {
+                            path: 'products',
+                            element: <Products />
+                        },
+                        {
+                            path: 'add-new-product',
+                            element: <AddNewProduct />
+                        }
+                    ]
+                },
+                {
                     path: 'data-view',
                     element: <DataView />
                 },
                 // User
                 {
                     path: 'profile',
-                    element: <Profile />
-                },
-                {
-                    path: 'user-profile',
-                    element: <UserProfile />
-                },
-                {
-                    path: 'account-profile',
-                    element: <AccountProfile />
-                },
-                {
-                    path: 'user-list',
-                    element: <UserList />
-                },
-                {
-                    path: 'user-card-list',
-                    element: <UserCardList />
-                },
-                {
-                    path: 'user-card',
-                    element: <UserCard />
+                    children: [
+                        {
+                            path: 'user-profile',
+                            element: <UserProfile />
+                        },
+                        {
+                            path: 'account-profile',
+                            element: <AccountProfile />
+                        },
+                        {
+                            path: 'user-list',
+                            element: <UserList />
+                        },
+                        {
+                            path: 'user-card-list',
+                            element: <UserCardList />
+                        },
+                        {
+                            path: 'user-card',
+                            element: <UserCard />
+                        }
+                    ]
                 },
                 //   == end User ==
                 {
