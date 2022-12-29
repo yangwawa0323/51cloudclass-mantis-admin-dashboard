@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Card, CardHeader, CardMedia, CardContent, Chip, IconButton, Box, Button, Grid, Typography, Rating } from '@mui/material';
 import { red, green } from '@mui/material/colors';
 import { HeartOutlined } from '@ant-design/icons';
-import { random } from '../../../../utils/random';
 
 const ProductCard = (props) => {
     const { product } = props;
@@ -64,8 +64,17 @@ const ProductCard = (props) => {
                                 <Rating value={product.rating} precision={0.1} />
                             </Box>
                             <Box>
-                                <Button disabled={product.state == 'Sold out'} variant="contained">
-                                    {product.state == 'Sold out' ? 'Sold out' : 'Add To Cart'}
+                                <Button
+                                    sx={{
+                                        '& .MuiButton-text': {
+                                            fontSize: '9px'
+                                        }
+                                    }}
+                                    size="small"
+                                    disabled={product.state == 'Sold out'}
+                                    variant="contained"
+                                >
+                                    <Typography variant="caption">{product.state == 'Sold out' ? 'Sold out' : 'Add To Cart'}</Typography>
                                 </Button>
                             </Box>
                         </Box>

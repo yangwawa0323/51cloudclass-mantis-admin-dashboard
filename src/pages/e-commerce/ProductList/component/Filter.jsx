@@ -22,6 +22,8 @@ import { grey } from '@mui/material/colors';
 import { ThinCheckbox } from '../../../StyledMain';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { setPrice } from '../../../../store/reducers/isotope';
 
 const colors = [
     'rgb(145, 213, 255)',
@@ -57,11 +59,14 @@ const ColorButton = (props) => {
 };
 
 const Filter = () => {
-    const [sliderRange, setSliderRange] = useState([50, 436]);
+    const dispatch = useDispatch();
 
-    const [rating, setRating] = useState(2);
+    const [sliderRange, setSliderRange] = useState([0, 1999]);
+
+    const [rating, setRating] = useState(4);
 
     const handleSliderChange = (event, newValue) => {
+        dispatch(setPrice({ price: { min: newValue[0], max: newValue[1] } }));
         setSliderRange(newValue);
     };
 
@@ -96,6 +101,37 @@ const Filter = () => {
                                         />
                                     }
                                 />
+                            </Grid>
+                            <Grid item sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                <Typography variant="h5">Price</Typography>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
+                                    <Box>
+                                        <Typography variant="body1" color="secondary">
+                                            Min
+                                        </Typography>
+                                        <OutlinedInput value={sliderRange[0]} />
+                                    </Box>
+                                    <Box>
+                                        <Typography variant="body1" color="secondary">
+                                            Max
+                                        </Typography>
+                                        <OutlinedInput value={sliderRange[1]} />
+                                    </Box>
+                                </Box>
+                                <Box>
+                                    <Slider
+                                        sx={{
+                                            '& .MuiSlider-thumb': {
+                                                backgroundColor: 'white',
+                                                border: '2px solid currentcolor'
+                                            }
+                                        }}
+                                        onChange={handleSliderChange}
+                                        value={sliderRange}
+                                        size="small"
+                                        max={1999}
+                                    />
+                                </Box>
                             </Grid>
                             <Grid item>
                                 <Typography variant="h6">Price</Typography>
@@ -132,37 +168,7 @@ const Filter = () => {
                             ))}
                         </Grid>
                     </Grid>
-                    <Grid item sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <Typography variant="h5">Price</Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-                            <Box>
-                                <Typography variant="body1" color="secondary">
-                                    Min
-                                </Typography>
-                                <OutlinedInput value={sliderRange[0]} />
-                            </Box>
-                            <Box>
-                                <Typography variant="body1" color="secondary">
-                                    Max
-                                </Typography>
-                                <OutlinedInput value={sliderRange[1]} />
-                            </Box>
-                        </Box>
-                        <Box>
-                            <Slider
-                                sx={{
-                                    '& .MuiSlider-thumb': {
-                                        backgroundColor: 'white',
-                                        border: '2px solid currentcolor'
-                                    }
-                                }}
-                                onChange={handleSliderChange}
-                                value={sliderRange}
-                                size="small"
-                                max={999}
-                            />
-                        </Box>
-                    </Grid>
+
                     <Grid item>
                         <Typography variant="h5">Rating</Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center' }}>

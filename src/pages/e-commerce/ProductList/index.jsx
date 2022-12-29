@@ -2,30 +2,34 @@
  * Mock data: https://dummyjson.com/products
  */
 
-import React, { useState } from 'react';
-import { Drawer, Typography, Grid, Box, IconButton } from '@mui/material';
+import React from 'react';
+import { Grid, Box } from '@mui/material';
 import StyledMain from '../../StyledMain';
-import { FilterOutlined } from '@ant-design/icons';
 import Filter from './component/Filter';
 import Main from './component/Main';
 
+import { useSelector } from 'react-redux';
+
 const ProductList = () => {
-    const [open, setOpen] = useState(false);
+    const filterDrawer = useSelector((state) => state.isotope.filterDrawer);
+
     return (
         <StyledMain>
-            <Box display="flex" flexDirection="row" gap={4}>
+            <Box display="flex" flexDirection="row" gap={4} sx={{ width: '100%' }}>
                 <Grid container spacing={3}>
-                    <Grid
-                        item
-                        sx={{
-                            display: {
-                                xs: 'none',
-                                md: 'block'
-                            }
-                        }}
-                    >
-                        <Filter />
-                    </Grid>
+                    {filterDrawer && (
+                        <Grid
+                            item
+                            sx={{
+                                display: {
+                                    xs: 'none',
+                                    md: 'block'
+                                }
+                            }}
+                        >
+                            <Filter />
+                        </Grid>
+                    )}
                     <Grid item zeroMinWidth xs>
                         <Main />
                     </Grid>

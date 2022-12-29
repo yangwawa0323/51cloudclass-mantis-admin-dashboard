@@ -1,22 +1,57 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Grid, Card, Container, CardContent, Button, OutlinedInput, Typography } from '@mui/material';
 import { SearchOutlined, FilterOutlined, DownOutlined } from '@ant-design/icons';
 import ProductCard from './ProductCard';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { random } from 'lodash';
+import { setFilterDrawer } from 'store/reducers/isotope';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Main = () => {
-    const fetchProducts = () => {
-        return axios.get('https://dummyjson.com/products?limit=27');
+    const dispatch = useDispatch();
+
+    const fetchProducts = async () => {
+        return await axios.get('https://dummyjson.com/products?limit=9');
     };
+
+    const toggleFilterDrawer = useCallback((filterDrawer) => {
+        dispatch(setFilterDrawer({ filterDrawer: filterDrawer }));
+    }, []);
 
     const { data } = useQuery('fetch-products', fetchProducts);
 
-    const products = data?.data?.products;
+    const allProducts = data?.data?.products;
+
+    const _isotope = useSelector((state) => state.isotope);
+    const menuDrawer = useSelector((state) => state.menu.drawerOpen);
+    const {
+        filterDrawer,
+        price: { min, max }
+    } = _isotope;
+
+    const useProducts = useCallback(() => {
+        const products = allProducts?.filter((p) => p.price > min && p.price < max);
+        return products?.map((p) => {
+            // p.state = ['Sold out', '30%', ''][random(3)];
+            p.state = '';
+            return (
+                <Grid item key={p.id} sm={6} md={4}>
+                    <ProductCard product={p} />
+                </Grid>
+            );
+        });
+    }, [min, max, allProducts]);
 
     return (
-        <Grid container spacing={2} sx={{ width: 'calc(100vw - 360px)' }}>
+        <Grid
+            container
+            spacing={2}
+            sx={{
+                transition: 'all 0.5s ease-in-out',
+                width: `calc(100vw - ${filterDrawer ? 360 : 40}px - ${menuDrawer ? 260 : 40}px )`
+            }}
+        >
             <Grid item xs={12}>
                 <Card variant="outlined">
                     <CardContent>
@@ -25,7 +60,7 @@ const Main = () => {
                             sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
                         >
                             <Grid item sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-                                <Button color="secondary" onClick={() => {}} sx={{ alignItems: 'center' }}>
+                                <Button color="secondary" onClick={() => toggleFilterDrawer(!filterDrawer)} sx={{ alignItems: 'center' }}>
                                     <FilterOutlined />
                                     <Typography paddingLeft="12px">Filter</Typography>
                                 </Button>
@@ -43,14 +78,7 @@ const Main = () => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={2}>
-                    {products?.splice(0, 9).map((p) => {
-                        p.state = ['Sold out', '30%', ''][random(3)];
-                        return (
-                            <Grid item xs={12} sm={6} md={4} key={p.id}>
-                                <ProductCard product={p} />
-                            </Grid>
-                        );
-                    })}
+                    {useProducts()}
                 </Grid>
             </Grid>
         </Grid>

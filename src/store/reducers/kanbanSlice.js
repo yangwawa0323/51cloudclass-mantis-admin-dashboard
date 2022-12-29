@@ -1,4 +1,3 @@
-import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { createSlice } from '@reduxjs/toolkit';
 import { findIndex } from 'lodash';
 import uuid from 'react-uuid';
