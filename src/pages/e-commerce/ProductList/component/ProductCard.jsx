@@ -9,6 +9,7 @@ const ProductCard = (props) => {
 
     return (
         <Card
+            className={`${product.category}`}
             variant="outlined"
             sx={{
                 transition: 'all 0.7s',
@@ -17,6 +18,7 @@ const ProductCard = (props) => {
                 }
             }}
         >
+            <input className="hidden product-name" type="hidden" value={product.title} />
             <CardHeader
                 action={
                     <IconButton size="large">

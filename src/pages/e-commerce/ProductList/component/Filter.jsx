@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
     Card,
@@ -22,8 +23,8 @@ import { grey } from '@mui/material/colors';
 import { ThinCheckbox } from '../../../StyledMain';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
-import { setPrice } from '../../../../store/reducers/isotope';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPrice, setFilterFraction } from '../../../../store/reducers/isotope';
 
 const colors = [
     'rgb(145, 213, 255)',
@@ -61,6 +62,8 @@ const ColorButton = (props) => {
 const Filter = () => {
     const dispatch = useDispatch();
 
+    const categories = useSelector((state) => state.isotope.categories);
+
     const [sliderRange, setSliderRange] = useState([0, 1999]);
 
     const [rating, setRating] = useState(4);
@@ -72,6 +75,11 @@ const Filter = () => {
 
     const handleRating = (event, newValue) => {
         setRating(newValue);
+    };
+
+    const handleCategoryChecked = (name) => (event) => {
+        dispatch(setFilterFraction({ name, include: event.target.checked, type: 'categories' }));
+        console.log('[DEBUG] event: ', event.target.checked, ', name: ', name);
     };
 
     return (
@@ -152,11 +160,13 @@ const Filter = () => {
                     <Grid item display="flex" flexDirection="column" xs={12}>
                         <Typography variant="h5">Categories</Typography>
                         <FormControlLabel label="All" control={<ThinCheckbox checked />} />
-                        <FormControlLabel label="Eletronics" control={<ThinCheckbox />} />
-                        <FormControlLabel label="Fashion" control={<ThinCheckbox />} />
-                        <FormControlLabel label="Book" control={<ThinCheckbox />} />
-                        <FormControlLabel label="Toys" control={<ThinCheckbox />} />
-                        <FormControlLabel label="Home & Kitchen" control={<ThinCheckbox />} />
+                        {categories.map((cate, index) => (
+                            <FormControlLabel
+                                key={index}
+                                label={<Typography sx={{ textTransform: 'capitalize' }}>{cate}</Typography>}
+                                control={<ThinCheckbox onChange={handleCategoryChecked(cate)} name={cate} value={cate} />}
+                            />
+                        ))}
                     </Grid>
                     <Grid item>
                         <Typography variant="h5">Color</Typography>

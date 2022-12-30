@@ -1,13 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { findIndex } from 'lodash';
 
 const initialState = {
-    filterDrawer: false,
-    category: 'all',
+    filterDrawer: true,
+    categories: [],
     price: {
         min: 0,
         max: 1999
     },
-    rating: 3
+    rating: 3,
+    filterFraction: {
+        categories: [],
+        brand: []
+    }
 };
 
 const isotope = createSlice({
@@ -21,14 +26,28 @@ const isotope = createSlice({
             const { min, max } = action.payload.price;
             state.price = { min, max };
         },
-        setCategory(state, action) {
-            state.category = action.payload.category;
+        setCategories(state, action) {
+            state.categories = action.payload.categories;
         },
         setRating(state, action) {
             state.rating = action.payload.rating;
+        },
+        setFilterFraction(state, action) {
+            const { type, name, include } = action.payload;
+
+            if (type === 'categories') {
+                const index = state.filterFraction.categories.findIndex((cate) => cate === name);
+                if (include) {
+                    if (index >= 0) return;
+                    state.filterFraction.categories.push(name);
+                } else {
+                    if (index === -1) return;
+                    state.filterFraction.categories.splice(index, 1);
+                }
+            }
         }
     }
 });
 
 export default isotope.reducer;
-export const { setPrice, setRating, setCategory, setFilterDrawer } = isotope.actions;
+export const { setPrice, setRating, setCategories, setFilterDrawer, setFilterFraction } = isotope.actions;

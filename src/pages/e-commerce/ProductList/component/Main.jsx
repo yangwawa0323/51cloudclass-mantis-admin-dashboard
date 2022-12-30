@@ -1,33 +1,58 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Grid, Card, Container, CardContent, Button, OutlinedInput, Typography } from '@mui/material';
 import { SearchOutlined, FilterOutlined, DownOutlined } from '@ant-design/icons';
 import ProductCard from './ProductCard';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { useQuery } from 'react-query';
-import { random } from 'lodash';
-import { setFilterDrawer } from 'store/reducers/isotope';
+import { uniq } from 'lodash';
+import { setFilterDrawer, setCategories } from 'store/reducers/isotope';
 import { useDispatch, useSelector } from 'react-redux';
+import Isotope from 'isotope-layout';
+import { debounce } from 'utils/tools';
 
 const Main = () => {
     const dispatch = useDispatch();
+    const isotopeRef = useRef();
 
-    const fetchProducts = async () => {
-        return await axios.get('https://dummyjson.com/products?limit=9');
-    };
+    var qsRegex;
+
+    isotopeRef.current = new Isotope('.filter-container', {
+        itemSelector: '.filter-item',
+        layoutMode: 'fitRows',
+        filter: function (itemElem) {
+            let hiddenElem = itemElem.querySelector('input[type=hidden i]');
+            return qsRegex ? hiddenElem.value.match(qsRegex) : true;
+        }
+    });
 
     const toggleFilterDrawer = useCallback((filterDrawer) => {
         dispatch(setFilterDrawer({ filterDrawer: filterDrawer }));
     }, []);
 
+    const quickSearch = debounce(function (event) {
+        qsRegex = new RegExp(event.target.value, 'gi');
+        isotopeRef.current.arrange();
+    }, 200);
+    //
+
+    const fetchProducts = async () => {
+        var data = await axios.get('https://dummyjson.com/products').then((resp) => resp.data);
+        const cateList = uniq(data.products.map((p) => p.category));
+        dispatch(setCategories({ categories: cateList }));
+        return data;
+    };
+
     const { data } = useQuery('fetch-products', fetchProducts);
 
-    const allProducts = data?.data?.products;
+    const allProducts = data?.products;
 
     const _isotope = useSelector((state) => state.isotope);
     const menuDrawer = useSelector((state) => state.menu.drawerOpen);
     const {
         filterDrawer,
-        price: { min, max }
+        price: { min, max },
+        filterFraction: { categories: filters },
+        categories
     } = _isotope;
 
     const useProducts = useCallback(() => {
@@ -36,12 +61,20 @@ const Main = () => {
             // p.state = ['Sold out', '30%', ''][random(3)];
             p.state = '';
             return (
-                <Grid item key={p.id} sm={6} md={4}>
+                <Grid item key={p.id} sm={6} md={4} data-name={p.name} className={`filter-item ${p.category}`}>
                     <ProductCard product={p} />
                 </Grid>
             );
         });
     }, [min, max, allProducts]);
+
+    // const useFilterLayout = useCallback(() => {
+    //     const products = allProducts?.filter((p) => p.price > min && p.price < max);
+    //     return products?.map((p) => {
+    //         const filter = [p.category];
+    //         return { id: p.id, filter };
+    //     });
+    // });
 
     return (
         <Grid
@@ -64,7 +97,7 @@ const Main = () => {
                                     <FilterOutlined />
                                     <Typography paddingLeft="12px">Filter</Typography>
                                 </Button>
-                                <OutlinedInput startAdornment={<SearchOutlined />} />
+                                <OutlinedInput onKeyUp={quickSearch} startAdornment={<SearchOutlined />} />
                             </Grid>
                             <Grid item>
                                 <Button color="inherit" variant="outlined" sx={{ height: '2.725rem', gap: '12px' }}>
@@ -77,7 +110,7 @@ const Main = () => {
                 </Card>
             </Grid>
             <Grid item xs={12}>
-                <Grid container spacing={2}>
+                <Grid container spacing={4} className="filter-container">
                     {useProducts()}
                 </Grid>
             </Grid>

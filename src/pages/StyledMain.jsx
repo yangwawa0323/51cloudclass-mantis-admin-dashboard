@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { Checkbox, Grid, SvgIcon, TableCell, TableHead, Typography } from '@mui/material';
