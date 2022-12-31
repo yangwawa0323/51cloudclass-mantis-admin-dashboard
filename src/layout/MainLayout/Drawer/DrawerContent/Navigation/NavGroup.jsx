@@ -16,7 +16,6 @@ const NavGroup = ({ item }) => {
     const [open, setOpen] = React.useState(true);
 
     const toggleCollapse = () => {
-        console.log('[DEBUG]: show chilren menu');
         setOpen(!open);
     };
 
@@ -25,7 +24,6 @@ const NavGroup = ({ item }) => {
             switch (childMenu.type) {
                 case 'collapse':
                     const childrenMenu = childMenu.children?.map((menu, index) => {
-                        // console.log('[DEBUG] children item:', menu);
                         return <NavItem key={index} item={menu} level={2} />;
                     });
                     return <NavItem key={childMenu.id} item={childMenu} level={1} childrenMenu={childrenMenu} />;

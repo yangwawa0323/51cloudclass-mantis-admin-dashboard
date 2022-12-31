@@ -32,7 +32,6 @@ const kanban = createSlice({
             const title = action.payload.title;
             const id = uuid();
             const newCard = { id, title, taskIds: [] };
-            console.log('[DEBUG]: new card: ', newCard);
             state.cards = {
                 ...state.cards,
                 [id]: newCard

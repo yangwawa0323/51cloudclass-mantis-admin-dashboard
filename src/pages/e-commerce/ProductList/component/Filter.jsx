@@ -25,6 +25,7 @@ import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPrice, setFilterFraction } from '../../../../store/reducers/isotope';
+import { debounce } from '../../../../utils/tools';
 
 const colors = [
     'rgb(145, 213, 255)',
@@ -68,10 +69,10 @@ const Filter = () => {
 
     const [rating, setRating] = useState(4);
 
-    const handleSliderChange = (event, newValue) => {
+    const handleSliderChange = debounce((event, newValue) => {
         dispatch(setPrice({ price: { min: newValue[0], max: newValue[1] } }));
         setSliderRange(newValue);
-    };
+    }, 300);
 
     const handleRating = (event, newValue) => {
         setRating(newValue);
@@ -79,7 +80,6 @@ const Filter = () => {
 
     const handleCategoryChecked = (name) => (event) => {
         dispatch(setFilterFraction({ name, include: event.target.checked, type: 'categories' }));
-        console.log('[DEBUG] event: ', event.target.checked, ', name: ', name);
     };
 
     return (

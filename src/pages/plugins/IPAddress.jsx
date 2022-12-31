@@ -35,7 +35,6 @@ const InputIPAddress = (props) => {
     const beforeMaskedStateChange = ({ previousState, currentState, nextState }) => {
         let { value, selection } = currentState;
         let oldValue = previousState?.value;
-        console.log('[DEBUG]:', currentState, previousState);
 
         if (value && !/^[\d\.]+$/.test(value)) {
             return previousState;

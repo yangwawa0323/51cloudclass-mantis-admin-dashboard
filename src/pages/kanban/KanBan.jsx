@@ -113,7 +113,6 @@ const KanBan = () => {
             const atSource = findIndex(sourceCardTasks, (task) => task === sourceTask);
             sourceCardTasks.splice(atSource, 1);
             destinationCardTasks.splice(destination.index, 0, sourceTask);
-            // console.log('[DEBUG]: source ', sourceCardTasks, 'destination ', destinationCardTasks);
             const newData = {
                 ...kanBanData,
                 cards: {
@@ -128,7 +127,6 @@ const KanBan = () => {
                     }
                 }
             };
-            // console.log('[DEBUG]: newData ', newData);
             dispatch(updateData({ kanban: newData }));
         }
     };

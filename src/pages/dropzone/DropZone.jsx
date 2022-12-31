@@ -16,11 +16,9 @@ const MyDropzone = () => {
 
     const onDrop = useCallback((acceptedFiles) => {
         // Do something with the files
-        console.log('[DEBUG]: Drag and drop ...');
         setCropData('#');
         if (acceptedFiles.length > 1) return;
         const uploadImagefile = acceptedFiles[0];
-        console.log('[DEBUG] upload image file: ', uploadImagefile);
         setImageFile(uploadImagefile);
         const reader = new FileReader();
 
@@ -53,7 +51,6 @@ const MyDropzone = () => {
     };
 
     const handleInput = (e) => {
-        console.log('[DEBUG]: ', e);
         reset();
     };
 

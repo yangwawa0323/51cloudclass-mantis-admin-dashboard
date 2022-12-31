@@ -33,7 +33,6 @@ const EditUserProfile = ({ open, node }) => {
 
     useEffect(() => {
         setDialogOpen(open);
-        console.log('#####[DEBUG]##### node: ', node);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
