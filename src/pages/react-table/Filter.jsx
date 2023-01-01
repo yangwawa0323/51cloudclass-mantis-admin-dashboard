@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, Divider, Grid, OutlinedInput } from '@mu
 import React, { useState, useEffect, useMemo } from 'react';
 import BasicFilterTable from './react-table/BasicFilter';
 import axios from 'axios';
-import { StatusCell, ProgressCell } from './/react-table/Basic';
+import { StatusCell, ProgressCell } from './react-table/Basic';
 import { useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 

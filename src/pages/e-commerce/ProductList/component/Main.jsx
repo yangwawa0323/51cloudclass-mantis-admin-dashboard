@@ -10,6 +10,7 @@ import { setFilterDrawer, setCategories } from 'store/reducers/isotope';
 import { useDispatch, useSelector } from 'react-redux';
 import Isotope from 'isotope-layout';
 import { debounce } from 'utils/tools';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
     const [filter, setFilter] = useState('*');
@@ -75,7 +76,14 @@ const Main = () => {
             p.state = '';
             return (
                 <Grid item key={p.id} sx={{ width: '300px' }} className={`filter-item ${p.category}`}>
-                    <ProductCard product={p} />
+                    <Link
+                        to={`/e-commerce/product-detail/${p.id}`}
+                        style={{
+                            textDecoration: 'none'
+                        }}
+                    >
+                        <ProductCard product={p} />
+                    </Link>
                 </Grid>
             );
         });

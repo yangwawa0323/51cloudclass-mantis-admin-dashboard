@@ -107,7 +107,7 @@ const MainRoutes = {
                             element: <ProductList />
                         },
                         {
-                            path: 'product-detail',
+                            path: 'product-detail/:productId',
                             element: <ProductDetail />
                         },
                         {

@@ -141,7 +141,7 @@ const MyDropzone = () => {
                                     sx={{
                                         '&.Mui-disabled': {
                                             color: 'white',
-                                            backgroundColor: '#8c8c8c'
+                                            bgColor: '#8c8c8c'
                                         }
                                     }}
                                 >

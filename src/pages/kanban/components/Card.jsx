@@ -72,7 +72,7 @@ const KanBanCard = (props) => {
                                             >
                                                 <div
                                                     style={{
-                                                        backgroundColor: 'white',
+                                                        bgColor: 'white',
                                                         display: 'flex',
                                                         justifyContent: 'space-between',
                                                         alignItems: 'center'

@@ -53,7 +53,7 @@ const ColorButton = (props) => {
                     '& .MuiSvgIcon-root': { visibility: 'hidden' },
                     width: '28px',
                     height: '28px',
-                    backgroundColor: bgColor
+                    bgColor: bgColor
                 }}
             />
         </Button>

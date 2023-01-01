@@ -151,13 +151,13 @@ const KanBan = () => {
                                 border: 'none rgb(230, 235, 241)',
                                 borderRadius: '4px',
                                 boxShadow: 'inherit',
-                                backgroundColor: 'transparent'
+                                bgColor: 'transparent'
                             }}
                         >
                             <CardContent
                                 sx={{
                                     justifyContent: 'flex-start',
-                                    backgroundColor: 'transparent',
+                                    bgColor: 'transparent',
                                     display: 'flex',
                                     flexDirection: 'row',
                                     gap: '24px',

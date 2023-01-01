@@ -258,7 +258,7 @@ const Profile = (props) => {
                                 variant="outlined"
                                 sx={{
                                     zIndex: 100,
-                                    backgroundColor: 'white'
+                                    bgColor: 'white'
                                 }}
                             >
                                 <CardHeader
@@ -325,7 +325,7 @@ const Profile = (props) => {
                                 variant="outlined"
                                 sx={{
                                     zIndex: 100,
-                                    backgroundColor: 'white'
+                                    bgColor: 'white'
                                 }}
                             >
                                 <CardHeader title={<Typography variant="subtitle1">About Us</Typography>} />

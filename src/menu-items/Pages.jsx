@@ -90,6 +90,20 @@ const pages = {
             target: false,
             children: [
                 {
+                    id: 'product-detail',
+                    type: 'item',
+                    title: 'Product Detail',
+                    url: '/e-commerce/product-detail/1',
+                    target: false
+                },
+                {
+                    id: 'product-list',
+                    type: 'item',
+                    title: 'Product List',
+                    url: '/e-commerce/product-list',
+                    target: false
+                },
+                {
                     id: 'products',
                     type: 'item',
                     title: 'Products',
@@ -108,20 +122,6 @@ const pages = {
                     type: 'item',
                     title: 'Checkout',
                     url: '/e-commerce/checkout',
-                    target: false
-                },
-                {
-                    id: 'product-detail',
-                    type: 'item',
-                    title: 'Product Detail',
-                    url: '/e-commerce/product-detail',
-                    target: false
-                },
-                {
-                    id: 'product-list',
-                    type: 'item',
-                    title: 'Product List',
-                    url: '/e-commerce/product-list',
                     target: false
                 }
             ]
