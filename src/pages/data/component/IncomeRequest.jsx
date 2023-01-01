@@ -7,7 +7,7 @@ const IncomeRequest = () => {
             <CardHeader action={<Link to="#">View all</Link>} title={<Typography variant="subtitle1">Active Tickets</Typography>} />
             <CardContent
                 sx={{
-                    '&.MuiCardContent-root': { padding: 'unset' }
+                    '&.MuiCardContent-root': { p: 'unset' }
                 }}
             ></CardContent>
         </Card>

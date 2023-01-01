@@ -42,8 +42,8 @@ const LatestPost = () => {
                                         variant="h6"
                                         sx={{
                                             '& > p': {
-                                                padding: '0px',
-                                                margin: '0px'
+                                                p: '0px',
+                                                m: '0px'
                                             }
                                         }}
                                     >
@@ -52,8 +52,8 @@ const LatestPost = () => {
                                     <Typography
                                         sx={{
                                             '& > p': {
-                                                padding: '0px',
-                                                margin: '0px'
+                                                p: '0px',
+                                                m: '0px'
                                             }
                                         }}
                                         variant="caption"

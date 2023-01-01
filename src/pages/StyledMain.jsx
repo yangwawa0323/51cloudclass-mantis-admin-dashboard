@@ -54,6 +54,14 @@ const StyledLorem = styled(LoremIpsum)`
     }
 `;
 
+export const StyledEllipsisTypography = styled(Typography)`
+    width: calc(100% - 10px);
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+`;
+
 export const StyledTypography = styled(Typography)`
     & svg {
         width: 36px;

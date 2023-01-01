@@ -38,7 +38,7 @@ const Main = () => {
     var qsRegex;
     var products;
     const allProducts = data?.products;
-    products = allProducts?.filter((p) => p.price > min && p.price < max);
+    products = allProducts?.filter((p) => p.price >= min && p.price <= max);
 
     useEffect(() => {
         try {

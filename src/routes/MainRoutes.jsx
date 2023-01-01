@@ -97,7 +97,6 @@ const MainRoutes = {
                 },
                 {
                     path: 'e-commerce',
-                    element: <ProductList />,
                     children: [
                         {
                             path: 'checkout',

@@ -23,7 +23,7 @@ const ProductList = () => {
                             sx={{
                                 display: {
                                     xs: 'none',
-                                    md: 'block'
+                                    sm: 'block'
                                 }
                             }}
                         >
