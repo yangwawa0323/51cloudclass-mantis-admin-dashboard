@@ -22,7 +22,7 @@ const ZoomPanPinch = (props) => {
                 alignItems: 'center',
                 background: grey[100],
                 padding: '20px 20px 50px 20px',
-                width: '455px',
+                width: { md: '455px', xs: '100%' },
                 height: '455px',
                 cursor: 'crosshair',
                 borderRadius: '12px',
@@ -32,7 +32,16 @@ const ZoomPanPinch = (props) => {
             <TransformWrapper initialScale={1} initialPositionX={0} initialPositionY={0}>
                 {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                     <React.Fragment>
-                        <Box sx={{ zIndex: 100, position: 'absolute', bottom: '0px', right: '0px' }}>
+                        <Box
+                            sx={{
+                                zIndex: 100,
+                                mt: '30px',
+                                position: 'absolute',
+                                bottom: '0px',
+                                right: { xs: 'unset', sm: '0px' },
+                                left: { xs: '0px', sm: 'unset' }
+                            }}
+                        >
                             <IconButton onClick={() => zoomIn()}>
                                 <ZoomInOutlined />
                             </IconButton>

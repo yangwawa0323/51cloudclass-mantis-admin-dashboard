@@ -16,7 +16,7 @@ const NextArrow = (props) => {
     return (
         <Box
             sx={{
-                marginLeft: '6px',
+                marginLeft: '14px',
                 borderRadius: '8px',
                 border: '1px solid #bcbcbc',
                 display: 'flex',
@@ -37,7 +37,7 @@ const PrevArrow = (props) => {
     return (
         <Box
             sx={{
-                marginLeft: '6px',
+                marginLeft: '14px',
                 borderRadius: '8px',
                 border: '1px solid #bcbcbc',
                 display: 'flex',
@@ -67,7 +67,9 @@ const StyledBox = styled(Box)(({ theme }) => ({
     top: '0px',
     right: '0px',
     [theme.breakpoints.down('sm')]: {
-        display: 'none'
+        right: 'unset',
+        left: '0px'
+        // display: 'none'
     }
 }));
 
@@ -128,8 +130,8 @@ const ProducsSlick = (props) => {
                                 outline: '1px solid #bcbcbc',
                                 padding: '4px',
                                 borderRadius: '8px',
-                                width: '32px !important',
-                                height: '32px !important'
+                                width: '50px !important',
+                                height: '50px !important'
                             }}
                             variant="rounded"
                             src={p.thumbnail}
