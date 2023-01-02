@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { HeartFilled, HeartOutlined, RedoOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import { Box, IconButton } from '@mui/material';
 import React from 'react';

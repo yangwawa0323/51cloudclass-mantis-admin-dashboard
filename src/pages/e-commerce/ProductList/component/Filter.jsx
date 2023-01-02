@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {
@@ -19,13 +20,15 @@ import {
 } from '@mui/material';
 
 import { grey } from '@mui/material/colors';
+import { useQuery } from 'react-query';
 
 import { ThinCheckbox } from '../../../StyledMain';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPrice, setFilterFraction } from '../../../../store/reducers/isotope';
-import { debounce } from '../../../../utils/tools';
+import { setPrice, setFilterFraction, setCategories } from 'store/reducers/isotope';
+import { debounce } from 'utils/tools';
+import axios from 'axios';
 
 const colors = [
     'rgb(145, 213, 255)',
@@ -53,7 +56,7 @@ const ColorButton = (props) => {
                     '& .MuiSvgIcon-root': { visibility: 'hidden' },
                     width: '28px',
                     height: '28px',
-                    bgColor: bgColor
+                    backgroundColor: bgColor
                 }}
             />
         </Button>
@@ -63,7 +66,24 @@ const ColorButton = (props) => {
 const Filter = () => {
     const dispatch = useDispatch();
 
-    const categories = useSelector((state) => state.isotope.categories);
+    // const categories = useSelector((state) => state.isotope.categories);
+    const fetchCategories = async () => {
+        return await axios.get('https://dummyjson.com/products/categories').then((response) => response.data);
+    };
+
+    const { status, data } = useQuery(['fetch-categories'], fetchCategories);
+
+    if (status.isLoading)
+        if (status === 'loading') {
+            return <div>Loading...</div>;
+        }
+
+    if (status === 'error') {
+        return <div>Error</div>;
+    }
+
+    const categories = data?.splice(5, Infinity);
+    dispatch(setCategories({ categories }));
 
     const [sliderRange, setSliderRange] = useState([0, 1999]);
 
@@ -160,7 +180,7 @@ const Filter = () => {
                     <Grid item display="flex" flexDirection="column" xs={12}>
                         <Typography variant="h5">Categories</Typography>
                         <FormControlLabel label="All" control={<ThinCheckbox checked />} />
-                        {categories.map((cate, index) => (
+                        {categories?.map((cate, index) => (
                             <FormControlLabel
                                 key={index}
                                 label={<Typography sx={{ textTransform: 'capitalize' }}>{cate}</Typography>}

@@ -3,12 +3,13 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
-import { IconButton, Avatar, Box } from '@mui/material';
+import { IconButton, Avatar, Box, Typography } from '@mui/material';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
+import { styled } from '@mui/styles';
 
 const NextArrow = (props) => {
     const { onClick } = props;
@@ -57,6 +58,19 @@ const PrevArrow = (props) => {
     );
 };
 
+const StyledBox = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    gap: '12px',
+    height: '80%',
+    width: '80px',
+    position: 'absolute',
+    top: '0px',
+    right: '0px',
+    [theme.breakpoints.down('sm')]: {
+        display: 'none'
+    }
+}));
+
 const ProducsSlick = (props) => {
     const slickRef = useRef();
     const { category } = props;
@@ -92,15 +106,15 @@ const ProducsSlick = (props) => {
         slickRef.current.slickPrev();
     };
     return (
-        <div style={{ marginLeft: '30px', height: '100%' }}>
+        <StyledBox>
             <Slider
                 ref={slickRef}
                 {...settings}
                 style={{
-                    justifyContent: 'space-evenly',
+                    // justifyContent: 'space-evenly',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '50px',
+                    gap: '40px',
                     height: '400px'
                 }}
             >
@@ -123,7 +137,7 @@ const ProducsSlick = (props) => {
                         />
                     ))}
             </Slider>
-        </div>
+        </StyledBox>
     );
 };
 

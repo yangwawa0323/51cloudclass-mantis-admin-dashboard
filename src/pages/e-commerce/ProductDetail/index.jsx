@@ -115,17 +115,20 @@ const ProductDetail = () => {
                 <Card variant="outlined">
                     <CardContent>
                         <Grid container spacing={2}>
-                            <Grid item xs={6}>
-                                <Grid container spacing={0.5}>
-                                    <Grid item xs={12} md={10} lg={9}>
-                                        <ZoomPanPinch image={product?.thumbnail} alt={product?.description} />
-                                    </Grid>
-                                    <Grid item xs={12} md={2} lg={3}>
-                                        {product && <ProducsSlick category={product?.category} />}
-                                    </Grid>
-                                </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                md={7}
+                                lg={6}
+                                position="relative"
+                                display="flex"
+                                justifyContent={{ sm: 'center', md: 'flex-start' }}
+                            >
+                                <ZoomPanPinch image={product?.thumbnail} alt={product?.description} />
+
+                                {product && <ProducsSlick category={product?.category} />}
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={12} md={5} lg={6}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                         <Box gap={3} display="flex" flexDirection="row" alignItems="center">
@@ -197,7 +200,7 @@ const ProductDetail = () => {
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={12} lg={6}>
                 <Card variant="outlined">
                     <CardContent>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -294,7 +297,7 @@ const ProductDetail = () => {
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} lg={6}>
                 <Card variant="outlined">
                     <CardHeader title="Related Products"></CardHeader>
                     <CardContent>

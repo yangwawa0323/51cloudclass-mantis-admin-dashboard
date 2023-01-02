@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Grid, Card, Container, CardContent, Button, OutlinedInput, Typography } from '@mui/material';
@@ -19,27 +20,34 @@ const Main = () => {
 
     // initialization
     const fetchProducts = async () => {
-        var data = await axios.get('https://dummyjson.com/products?limit=21').then((resp) => resp.data);
-        const cateList = uniq(data.products.map((p) => p.category));
-        dispatch(setCategories({ categories: cateList }));
-        return data;
+        return await axios.get('https://dummyjson.com/products?limit=21').then((resp) => resp.data);
     };
 
-    const { data } = useQuery('fetch-products', fetchProducts);
+    const { data, status } = useQuery(['fetch-products'], fetchProducts);
+
+    if (status.isLoading)
+        if (status === 'loading') {
+            return <div>Loading...</div>;
+        }
+
+    if (status === 'error') {
+        return <div>Error</div>;
+    }
 
     const isotope = useSelector((state) => state.isotope);
+
     //
     const {
         filterDrawer,
         price: { min, max },
-        filterFraction: { categories: filters },
-        categories
+        filterFraction: { categories: filters }
     } = isotope;
 
     var qsRegex;
-    var products;
+
     const allProducts = data?.products;
-    products = allProducts?.filter((p) => p.price >= min && p.price <= max);
+    const products = allProducts?.filter((p) => p.price >= min && p.price <= max);
+    console.log('[DEBUG]: min: ', min, ' , max: ', max, ' products: ', products);
 
     useEffect(() => {
         try {
@@ -52,23 +60,6 @@ const Main = () => {
             console.log('[DEBUG] err: ', err);
         }
     }, [products]);
-
-    const quickSearch = debounce(function (event) {
-        qsRegex = new RegExp(event.target.value, 'gi');
-        isotopeRef.current.arrange({
-            filter: function (itemElem) {
-                let hiddenElem = itemElem.querySelector('input[type=hidden i]');
-                return qsRegex ? hiddenElem.value.match(qsRegex) : true;
-                setFilter(hiddenElem.value);
-            }
-        });
-    }, 300);
-    //
-
-    const toggleFilterDrawer = (filterDrawer) => {
-        dispatch(setFilterDrawer({ filterDrawer: filterDrawer }));
-        isotopeRef.current.arrange({ filter });
-    };
 
     const useProducts = useCallback(() => {
         // const products = allProducts?.filter((p) => p.price > min && p.price < max);
@@ -87,7 +78,24 @@ const Main = () => {
                 </Grid>
             );
         });
-    }, [min, max]);
+    }, [min, max, products, filter]); // need re-render when price, filter has been changend.
+
+    const quickSearch = debounce(function (event) {
+        qsRegex = new RegExp(event.target.value, 'gi');
+        isotopeRef.current.arrange({
+            filter: function (itemElem) {
+                let hiddenElem = itemElem.querySelector('input[type=hidden i]');
+                return qsRegex ? hiddenElem.value.match(qsRegex) : true;
+                setFilter(hiddenElem.value);
+            }
+        });
+    }, 300);
+    //
+
+    const toggleFilterDrawer = (filterDrawer) => {
+        dispatch(setFilterDrawer({ filterDrawer: filterDrawer }));
+        isotopeRef.current.arrange({ filter });
+    };
 
     return (
         <Grid container spacing={2}>
