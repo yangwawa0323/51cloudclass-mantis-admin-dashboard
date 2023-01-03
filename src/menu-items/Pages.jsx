@@ -9,7 +9,8 @@ import {
     InsertRowAboveOutlined,
     BuildOutlined,
     FileDoneOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -23,7 +24,8 @@ const icons = {
     IdcardOutlined,
     DropboxOutlined,
     FileDoneOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    MessageOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -71,6 +73,14 @@ const pages = {
             type: 'item',
             url: '/data-view',
             icon: icons.DatabaseOutlined,
+            target: false
+        },
+        {
+            id: 'chat',
+            title: 'Chat',
+            type: 'item',
+            url: '/chat',
+            icon: icons.MessageOutlined,
             target: false
         },
         {

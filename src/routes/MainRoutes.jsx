@@ -20,6 +20,8 @@ import Filtering from 'pages/react-table/Filter';
 import Pagination from 'pages/react-table/Pagnation';
 import RowSelection from 'pages/react-table/RowSelection';
 
+const Chat = Loadable(lazy(() => import('pages/chat')));
+
 const AddNewProduct = Loadable(lazy(() => import('pages/e-commerce/AddNewProduct')));
 const Checkout = Loadable(lazy(() => import('pages/e-commerce/Checkout')));
 const Products = Loadable(lazy(() => import('pages/e-commerce/Products')));
@@ -85,6 +87,10 @@ const MainRoutes = {
                 {
                     path: 'dropzone',
                     element: <MyDropZone />
+                },
+                {
+                    path: 'chat',
+                    element: <Chat />
                 },
                 {
                     path: 'dashboard',

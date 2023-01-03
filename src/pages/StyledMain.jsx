@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import { Checkbox, Grid, SvgIcon, TableCell, TableHead, Typography } from '@mui/material';
 import { LoremIpsum, Avatar as LoremAvatar } from 'react-lorem-ipsum';
@@ -53,6 +53,13 @@ const StyledLorem = styled(LoremIpsum)`
         margin: 0px;
     }
 `;
+
+export const justifyAlignCenter = {
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row'
+};
 
 export const StyledEllipsisTypography = styled(Typography)`
     width: calc(100% - 10px);
