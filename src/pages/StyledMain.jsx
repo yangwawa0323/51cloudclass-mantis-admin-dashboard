@@ -2,7 +2,8 @@
 import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import { Checkbox, Grid, SvgIcon, TableCell, TableHead, Typography } from '@mui/material';
-import { LoremIpsum, Avatar as LoremAvatar } from 'react-lorem-ipsum';
+// import { LoremIpsum, Avatar as LoremAvatar } from 'react-lorem-ipsum';
+
 import { CheckSquareFilled } from '@ant-design/icons';
 import { Box } from '@mui/system';
 
@@ -42,20 +43,34 @@ export const StyledTableHead = styled(TableHead)`
     border-bottom: 2px solid rgb(240, 240, 240);
 `;
 
-export const StyledLoremAvatar = styled(LoremAvatar)`
-    width: 48px;
-    height: 48pxl;
-`;
+// export const StyledLoremAvatar = styled(LoremAvatar)`
+//     width: 48px;
+//     height: 48px;
+// `;
 
-const StyledLorem = styled(LoremIpsum)`
-    '& > p' : {
-        padding: 0px;
-        margin: 0px;
-    }
-`;
+// const StyledLorem = styled(LoremIpsum)`
+//     '& > p' : {
+//         padding: 0px;
+//         margin: 0px;
+//     }
+// `;
 
 export const justifyAlignCenter = {
     justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row'
+};
+
+export const flexStart = {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row'
+};
+
+export const flexEnd = {
+    justifyContent: 'flex-end',
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row'

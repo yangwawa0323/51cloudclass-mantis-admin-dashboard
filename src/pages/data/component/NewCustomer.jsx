@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { Grid, Card, CardHeader, Avatar, CardContent, Divider, Typography, Link } from '@mui/material';
-import { StyledLoremAvatar } from '../../StyledMain';
-import { fullname, username } from 'react-lorem-ipsum';
 import { Box } from '@mui/system';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import { random } from '../../../utils/random';
 import SimpleBarScroll from 'components/third-party/SimpleBar';
+import { faker } from '@faker-js/faker';
 
 const NewCustomer = () => {
     return (
@@ -20,14 +19,12 @@ const NewCustomer = () => {
                             {Array.from(Array(12).keys()).map((_, index) => (
                                 <Grid container padding="10px" key={index} spacing={2}>
                                     <Grid item>
-                                        <Avatar>
-                                            <StyledLoremAvatar />
-                                        </Avatar>
+                                        <Avatar src={faker.image.avatar()} />
                                     </Grid>
                                     <Grid item zeroMinWidth xs>
                                         <Grid container spacing={1}>
                                             <Grid item zeroMinWidth xs>
-                                                <Typography variant="h6">{fullname()}</Typography>
+                                                <Typography variant="h6">{faker.name.fullName()}</Typography>
                                                 <Typography variant="caption" color="secondary">
                                                     {['stay hungry stay foolish!', 'Cheers!'][random(2)]}
                                                 </Typography>

@@ -19,9 +19,9 @@ import {
 
 import { StyledTableHead, StyledTableHeadCell } from '../../StyledMain';
 import { countries } from '../../../store/data/KanBanInitData';
-import { fullname } from 'react-lorem-ipsum';
 import { random } from '../../../utils/random';
 import SimpleBarScroll from '../../../components/third-party/SimpleBar';
+import { faker } from '@faker-js/faker';
 
 const LatestCustomer = () => {
     return (
@@ -61,7 +61,7 @@ const LatestCustomer = () => {
                                                     />
                                                 </TableCell>
                                                 <TableCell>{co.name}</TableCell>
-                                                <TableCell>{fullname()}</TableCell>
+                                                <TableCell>{faker.name.fullName()}</TableCell>
                                                 <TableCell>{random(100)}%</TableCell>
                                             </TableRow>
                                         );

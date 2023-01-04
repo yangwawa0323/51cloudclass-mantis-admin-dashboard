@@ -15,9 +15,8 @@ import {
     Chip
 } from '@mui/material';
 
-import { LoremIpsum } from 'react-lorem-ipsum';
-
 import { StyledTableHead, StyledTableHeadCell, StyledLoremIpsum, StyledTableBodyCell } from '../../StyledMain';
+import { faker } from '@faker-js/faker';
 
 const RecentTicket = () => {
     return (
@@ -41,8 +40,8 @@ const RecentTicket = () => {
                         <TableBody>
                             {Array.from(Array(8).keys()).map((_, index) => (
                                 <TableRow key={index}>
-                                    <StyledTableBodyCell size="small">
-                                        <StyledLoremIpsum words={3} />
+                                    <StyledTableBodyCell size="small" height="40px">
+                                        {faker.lorem.sentence(6)}
                                     </StyledTableBodyCell>
                                     <StyledTableBodyCell size="small">Support</StyledTableBodyCell>
                                     <StyledTableBodyCell size="small">

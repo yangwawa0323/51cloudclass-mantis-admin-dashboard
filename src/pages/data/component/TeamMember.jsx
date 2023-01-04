@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Card, CardHeader, Avatar, CardContent, Divider, Typography, Link } from '@mui/material';
 
 import { status } from '../../../store/data/KanBanInitData';
-import { Avatar as LoremAvatar, fullname, username } from 'react-lorem-ipsum';
+import { faker } from '@faker-js/faker';
 
 const TeamMember = () => {
     return (
@@ -25,12 +25,10 @@ const TeamMember = () => {
                             <Grid item key={st.id} xs={12}>
                                 <Grid container spacing={2}>
                                     <Grid item>
-                                        <Avatar>
-                                            <LoremAvatar style={{ width: '48px', height: '48px' }} />
-                                        </Avatar>
+                                        <Avatar src={faker.image.avatar()} />
                                     </Grid>
                                     <Grid item zeroMinWidth xs>
-                                        <Typography variant="subtitle1">{fullname()}</Typography>
+                                        <Typography variant="subtitle1">{faker.name.fullName()}</Typography>
                                         <Typography color="secondary" variant="caption">
                                             {st.position}
                                         </Typography>

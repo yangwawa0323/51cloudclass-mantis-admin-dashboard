@@ -17,9 +17,9 @@ import {
     TableBody,
     Avatar
 } from '@mui/material';
-import { StyledLoremAvatar } from '../../StyledMain';
-import LoremIpsum, { Avatar as LoremAvatar } from 'react-lorem-ipsum';
+
 import { ArrowsAltOutlined } from '@ant-design/icons';
+import { faker } from '@faker-js/faker';
 
 const LatestPost = () => {
     return (
@@ -35,7 +35,7 @@ const LatestPost = () => {
                         <Grid item key={index} sx={{ width: '100%' }}>
                             <Grid container spacing={1} alignItems="center">
                                 <Grid item xs={4}>
-                                    <LoremAvatar width={90} height={90} style={{ borderRadius: '6px' }} />
+                                    <Avatar src={faker.image.avatar()} />
                                 </Grid>
                                 <Grid item zeroMinWidth xs justifyContent="flex-start">
                                     <Typography
@@ -47,7 +47,7 @@ const LatestPost = () => {
                                             }
                                         }}
                                     >
-                                        <LoremIpsum avgWordsPerSentence={4} avgSentencesPerParagraph={0} startWithLoremIpsum={false} />
+                                        {faker.lorem.sentence(10)}
                                     </Typography>
                                     <Typography
                                         sx={{

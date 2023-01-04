@@ -15,8 +15,8 @@ import {
     Avatar
 } from '@mui/material';
 
-import { StyledTableHead, StyledTableHeadCell, StyledLoremAvatar, StyledLoremIpsum } from '../../StyledMain';
-import { fullname } from 'react-lorem-ipsum';
+import { StyledTableHead, StyledTableHeadCell } from '../../StyledMain';
+import { faker } from '@faker-js/faker';
 
 const ActiveTicket = () => {
     return (
@@ -53,12 +53,10 @@ const ActiveTicket = () => {
                                             justifyContent={{ xs: 'center', md: 'unset' }}
                                         >
                                             <Grid item>
-                                                <Avatar>
-                                                    <StyledLoremAvatar />
-                                                </Avatar>
+                                                <Avatar src={faker.image.avatar()} />
                                             </Grid>
                                             <Grid item zeroMinWidth>
-                                                {fullname()}
+                                                {faker.name.fullName()}
                                             </Grid>
                                         </Grid>
                                     </TableCell>
@@ -72,7 +70,7 @@ const ActiveTicket = () => {
                                             }}
                                             variant="h6"
                                         >
-                                            <StyledLoremIpsum words={6} />
+                                            {faker.lorem.sentence(5)}
                                         </Typography>
                                         <Typography
                                             variant="caption"
@@ -84,7 +82,7 @@ const ActiveTicket = () => {
                                                 }
                                             }}
                                         >
-                                            <StyledLoremIpsum words={6} />
+                                            {faker.lorem.sentence(6)}
                                         </Typography>
                                     </TableCell>
                                 </TableRow>

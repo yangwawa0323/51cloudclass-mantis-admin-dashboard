@@ -1,9 +1,13 @@
-import React, { useMemo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+import React, { useCallback, useMemo } from 'react';
 
 import { ListItemAvatar, Box, ListItemButton, ListItemIcon, Badge, ListItemText, Avatar, Typography, Divider } from '@mui/material';
 import { CheckCircleFilled, CheckCircleOutlined, CheckOutlined, InboxOutlined } from '@ant-design/icons';
 import { justifyAlignCenter } from '../../StyledMain';
 import { random } from '../../../utils/random';
+
+import { faker } from '@faker-js/faker';
 
 const Dot = (props) => <Box sx={{ width: 8, height: 8, borderRadius: '50%' }} bgcolor={props.color}></Box>;
 
@@ -16,18 +20,20 @@ const UserItem = (props) => {
     );
 
     const { user } = props;
+    const userAvatar = useMemo(() => <Avatar src={faker.image.avatar()} alt={user.username}></Avatar>, [user.username]);
+
+    // console.log('[DEBUG]: user: ', user);
+    const formattedUserInfo = useCallback((user) => [user.firstName, user.lastName, user.id].join(' '), [user]);
+
+    const handleListItemClick = () => {
+        console.log('[DEBUG]: user list item :', formattedUserInfo(user), ' clicked');
+    };
 
     return (
-        <ListItemButton disableRipple>
+        <ListItemButton disableRipple onClick={handleListItemClick}>
             <ListItemAvatar>
                 <Badge>
-                    <Avatar
-                        src={user.image}
-                        alt={user.username}
-                        sx={{
-                            boxShadow: '1px 1px 4px 1px rgba(0,0,0,0.35)'
-                        }}
-                    ></Avatar>
+                    {userAvatar}
                     <Badge badgeContent=" " sx={{ color: 'rgb(82, 196, 26)', top: '20%', right: '20%', height: '16px', padding: '4px' }}>
                         <CheckCircleFilled />
                     </Badge>
@@ -36,19 +42,20 @@ const UserItem = (props) => {
 
             <ListItemText
                 primary={
-                    <Box component="span" sx={{ ...justifyAlignCenter, justifyContent: 'space-between' }}>
-                        <Typography variant="h5">{user.lastName}</Typography>
-                        <Typography variant="caption" color="secondary">
-                            {randomTime}
-                        </Typography>
-                    </Box>
-                }
-                secondary={
-                    <Box component="span" sx={{ ...justifyAlignCenter, justifyContent: 'space-between' }}>
-                        <Typography variant="caption" color="secondary">
-                            {user.company.title}
-                        </Typography>
-                        <Box>{randomStatus}</Box>
+                    <Box>
+                        <Box component="div" sx={{ ...justifyAlignCenter, justifyContent: 'space-between' }}>
+                            <Typography variant="h5">{user.lastName}</Typography>
+                            <Typography variant="caption" color="secondary">
+                                {randomTime}
+                            </Typography>
+                        </Box>
+
+                        <Box component="div" sx={{ ...justifyAlignCenter, justifyContent: 'space-between' }}>
+                            <Typography variant="caption" color="secondary">
+                                {user.company.title}
+                            </Typography>
+                            <Box>{randomStatus}</Box>
+                        </Box>
                     </Box>
                 }
             />

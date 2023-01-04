@@ -31,7 +31,8 @@ import styled from '@emotion/styled';
 
 import { status } from 'store/data/KanBanInitData';
 
-import { StyledTableHeadCell, StyledTableHead, StyledLoremAvatar } from '../../StyledMain';
+import { StyledTableHeadCell, StyledTableHead } from '../../StyledMain';
+import { faker } from '@faker-js/faker';
 
 const Project = () => {
     return (
@@ -61,9 +62,7 @@ const Project = () => {
                                     <TableCell>
                                         <Grid container spacing={2}>
                                             <Grid item>
-                                                <Avatar>
-                                                    <StyledLoremAvatar />
-                                                </Avatar>
+                                                <Avatar src={faker.image.avatar()} />
                                             </Grid>
                                             <Grid item zeroMinWidth xs>
                                                 <Typography variant="h6">{st.username}</Typography>

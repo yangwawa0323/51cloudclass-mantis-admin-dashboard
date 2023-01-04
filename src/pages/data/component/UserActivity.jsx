@@ -3,8 +3,7 @@ import React from 'react';
 import { Grid, Card, CardHeader, Avatar, Badge, CardContent, Divider, Typography, Link } from '@mui/material';
 import { status } from 'store/data/KanBanInitData';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { Avatar as LoremAvatar, fullname, username } from 'react-lorem-ipsum';
-import { StyledLoremAvatar } from '../../StyledMain';
+import { faker } from '@faker-js/faker';
 
 const UserActivity = () => {
     return (
@@ -41,15 +40,13 @@ const UserActivity = () => {
                                                     horizontal: 'right'
                                                 }}
                                             >
-                                                <Avatar>
-                                                    <StyledLoremAvatar />
-                                                </Avatar>
+                                                <Avatar src={faker.image.avatar()} />
                                             </Badge>
                                         </Grid>
                                         <Grid item zeroMinWidth xs>
-                                            <Typography variant="subtitle1">{fullname()}</Typography>
+                                            <Typography variant="subtitle1">{faker.name.fullName()}</Typography>
                                             <Typography color="secondary" variant="caption">
-                                                Lorem Ipsum is simply dummy text.
+                                                {faker.lorem.sentence(5)}
                                             </Typography>
                                         </Grid>
                                         <Grid item display="flex" gap="5px" alignItems="center">
