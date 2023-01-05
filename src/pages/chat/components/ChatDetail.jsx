@@ -76,6 +76,7 @@ const ChatDetail = (props) => {
         setChosenEmoji(emojiObject);
         inputRef.current.value = `${value + emojiObject.emoji}`;
         setValue(`${value + emojiObject.emoji}`);
+        setAnchorEl(null);
     };
 
     // console.log('[DEBUG]: chat record:', chatRecord);
@@ -271,7 +272,7 @@ const ChatDetail = (props) => {
                             <PictureOutlined />
                         </IconButton>
                         <IconButton sx={{ color: yellow[800] }} onClick={handleSmileClick}>
-                            <SmileOutlined />
+                            <SmileOutlined style={{ pointerEvents: 'none' }} />
                         </IconButton>
                         <IconButton sx={{ color: grey[400] }}>
                             <SoundOutlined />
